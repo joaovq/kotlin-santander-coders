@@ -8,5 +8,22 @@ package Exercises_Santander_Coders.aula2.exercises
 * */
 
 fun main(args: Array<String>) {
+    println("Digite uma nota de 0 a 10: ")
+
+    var nota :Int?
+    val boolean:Boolean = false
+
+    while (!boolean){
+        nota = readln().toInt()
+        if (nota in 0..10){
+            break
+        }
+        println("Nota inválida!!")
+        println("Digite uma nota de 0 a 10: ")
+    }
+
+
+        println("Nota válida!!")
+
 
 }
