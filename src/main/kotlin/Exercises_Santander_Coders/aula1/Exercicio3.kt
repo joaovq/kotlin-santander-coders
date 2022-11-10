@@ -1,7 +1,9 @@
 package Exercises_Santander_Coders.aula1
 
 import java.io.File
+import java.io.InputStream
 import java.lang.StringBuilder
+import java.nio.charset.Charset
 import java.util.*
 
 /*TODO:
@@ -56,5 +58,13 @@ fun main(args: Array<String>) {
 //    Print do nickname
     println("nickname gerado: $nickname")
 
-    val file =File("")
+
+//    Colocar em uma file como texto
+    val file =File("utils/file.txt")
+
+    val writable = file.setWritable(true)
+
+    file.appendText(nickname, Charsets.UTF_8)
+
+
 }
