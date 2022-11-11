@@ -25,9 +25,19 @@ fun main(args: Array<String>) {
     val emDias = idade?.times(356)
     val emHoras = idade?.times(8760)
     val emMinutos = idade?.times(525600)
+ // Nova forma de fazer e bem legal, Boa prática também
+    val emMeses = idade?.times(QTD_MESES_ANO)
+    val emDias = idade?.times(QTD_DIAS_ANO)
+    val emHoras = idade?.times(QTD_HORAS_ANO)
+    val emMinutos = idade?.times(QTD_MINUTOS_ANO)
 
     println("Em meses :$emMeses")
     println("Em dias :$emDias")
     println("Em horas :$emHoras")
     println("Em minutos :$emMinutos")
 }
+
+const val QTD_MESES_ANO = 12
+const val QTD_DIAS_ANO = 356
+const val QTD_HORAS_ANO = 8760
+const val QTD_MINUTOS_ANO = 525600
