@@ -25,8 +25,11 @@ fun main(args: Array<String>) {
         condition = user.equals(password, true)
     }
 
+    //  user.contains(password) podemos utilizar isso, .not() nega o booleano
+    // podemos utilzar em um do while
     println("Cadastro feito com sucesso.")
-
+    
+    
 //        A partir do léxico, numero de caracteres, alfabeto
 //    if (user.compareTo(password, true) > 1)
 }
