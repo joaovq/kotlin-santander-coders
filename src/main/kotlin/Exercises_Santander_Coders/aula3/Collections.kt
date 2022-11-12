@@ -8,6 +8,9 @@ fun main() {
 
     exemplo = mutableListOf(1)
 
+    val string:String
+
+
     println(exemplo)
     val list : List<Int> = listOf(1)
 
@@ -38,7 +41,7 @@ fun main() {
     set.retainAll{
         it.startsWith("23")
     }
-
+    val int :Int
     val map : Map<Long, String>
     val map1 : MutableMap<Long, String>
 
@@ -51,7 +54,7 @@ Dentro de uma função, um parâmetro vararg do tipo T é visível como um array
 como no exemplo acima, onde a variável ts tem o tipo Array<out T>.
 
 Apenas um parâmetro pode ser marcado como vararg. Se um parâmetro vararg não for o último da lista,
-os valores para os parâmetros subsequentes podem ser passados ​​usando a sintaxe de argumento nomeado ou,
+os valores para os parâmetros subsequentes podem ser passados usando a sintaxe de argumento nomeado ou,
 se o parâmetro tiver um tipo de função, passando um lambda fora dos parênteses.
 
 Quando você chama uma função vararg, você pode passar argumentos individualmente, 
