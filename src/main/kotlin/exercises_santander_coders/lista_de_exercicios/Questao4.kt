@@ -1,6 +1,10 @@
 package exercises_santander_coders.lista_de_exercicios
 
-
+/*
+*   TODO:Faça um programa que gera uma lista dos números primos
+*    existentes entre 1 e um número inteiro informado pelo usuário.
+*
+* */
 
 fun main(args: Array<String>){
     println("Digite o número total de eleitores: ")
@@ -10,6 +14,7 @@ fun main(args: Array<String>){
     var c = 0
     if (numTotal<1){
         println("Número inválido")
+        return
     }
 
 
