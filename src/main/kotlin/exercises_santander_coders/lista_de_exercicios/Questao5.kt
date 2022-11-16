@@ -9,8 +9,12 @@ fun main(args: Array<String>) {
     }
 
 
-    println("Números ímpares entre 1 e $maxNumber")
+    println("Números primos entre 1 e $maxNumber")
 
-    println( (1..maxNumber).filter { num -> num%2 != 0 })
+   for (i in 1..maxNumber){
+       if ((2 until i).none { i % it == 0 })
+           println(i)
+
+   }
 
 }
