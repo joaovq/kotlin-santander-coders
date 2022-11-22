@@ -116,18 +116,18 @@ fun exibirItensEmEstoque(){
 private fun print(entity: Triple<Long, String, Int>) :String{
     if (entity.first > 100) {
         return """ 
-             ------------------------------
+            ------------------------------
             #0${entity.first} | ${entity.second} | ${entity.third}
         """.trimIndent()
 
     } else if (entity.first > 10) {
         return """
-             ------------------------------
+            ------------------------------
             #00${entity.first} | ${entity.second} | ${entity.third}
         """.trimIndent()
     } else {
         return """
-             ------------------------------
+            ------------------------------
             #000${entity.first} | ${entity.second} | ${entity.third}
         """.trimIndent()
     }
