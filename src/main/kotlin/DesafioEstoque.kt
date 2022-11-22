@@ -1,5 +1,7 @@
+import java.io.File
 import java.lang.IndexOutOfBoundsException
 import java.lang.NumberFormatException
+import java.nio.charset.Charset
 import kotlin.Exception
 
 var estoque :MutableList<Triple<Long,String, Int>> = mutableListOf()
@@ -30,6 +32,7 @@ fun mostrarMenu(){
             4 -> exibirTodosOsItens()
             5 -> {
                 println("Programa encerrado!!")
+                imprimirDadosTxt(estoque)
                 return
             }
             else->{
@@ -80,7 +83,7 @@ fun editarItens(){
         val copy = estoque[id - 1].copy(first = Integer.toUnsignedLong(id), second = nome, third = qtdEmEstoque)
         estoque.removeAt(id-1)
         estoque.add(index = id-1, element = copy)
-    }catch (e:IndexOutOfBoundsException){
+    }catch (e:IndexOutOfBoundsException ,){
             e.printStackTrace()
     }
         println("Item editado!!")
@@ -94,8 +97,7 @@ class LimiteEstoqueMaxException: Exception("Erro: Quantidade máxima no estoque 
 fun exibirTodosOsItens(){
     println("ID | Peça | Quantidade")
     estoque.forEach {
-        print(it)
-
+        println(print(it))
     }
 
     mostrarMenu()
@@ -105,20 +107,41 @@ fun exibirItensEmEstoque(){
     val filter = estoque.filter { (it.third == 0).not() }
     println("ID | Peça | Quantidade")
     filter.forEach {
-        print(it)
+        println(print(it))
+    }
+    mostrarMenu()
+}
+
+private fun print(entity: Triple<Long, String, Int>) :String{
+    if (entity.first > 100) {
+        return """ 
+             ------------------------------
+            #0${entity.first} | ${entity.second} | ${entity.third}
+        """.trimIndent()
+
+    } else if (entity.first > 10) {
+        return """
+             ------------------------------
+            #00${entity.first} | ${entity.second} | ${entity.third}
+        """.trimIndent()
+    } else {
+        return """
+             ------------------------------
+            #000${entity.first} | ${entity.second} | ${entity.third}
+        """.trimIndent()
     }
 }
 
-private fun print(entity: Triple<Long, String, Int>) {
-    if (entity.first > 100) {
-        println("#0${entity.first} | ${entity.second} | ${entity.third}")
-        println("--------------------------")
-    } else if (entity.first > 10) {
-        println("#00${entity.first} | ${entity.second} | ${entity.third}")
-        println("--------------------------")
-    } else {
-        println("#000${entity.first} | ${entity.second} | ${entity.third}")
-        println("--------------------------")
+fun imprimirDadosTxt(estoque:MutableList<Triple<Long,String, Int>>){
+    val file=File("utils/estoque.txt")
+    file.setWritable(true)
+    file.appendText("ID | Peça | Quantidade\n", Charset.defaultCharset())
+
+    val filter = estoque.filter { (it.third == 0).not() }
+
+    filter.forEach {
+        file.appendText(print(it)+"\n")
     }
+
 }
 
