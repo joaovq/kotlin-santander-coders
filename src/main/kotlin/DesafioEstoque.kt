@@ -144,5 +144,6 @@ fun imprimirDadosTxt(estoque:MutableList<Triple<Long,String, Int>>){
         file.appendText(print(it)+"\n")
     }
 
+    println("\n\n")
 }
 
