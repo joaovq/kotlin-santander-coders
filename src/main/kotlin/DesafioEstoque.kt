@@ -113,25 +113,26 @@ fun exibirItensEmEstoque(){
     mostrarMenu()
 }
 
-private fun print(entity: Triple<Long, String, Int>) :String{
+private fun print(entity: Triple<Long, String, Int>) :String =
     if (entity.first > 100) {
-        return """ 
+     """ 
             ------------------------------
             #0${entity.first} | ${entity.second} | ${entity.third}
         """.trimIndent()
 
-    } else if (entity.first > 10) {
-        return """
+    }
+    else if (entity.first > 10) {
+     """
             ------------------------------
             #00${entity.first} | ${entity.second} | ${entity.third}
         """.trimIndent()
-    } else {
-        return """
+    }
+    else {
+     """
             ------------------------------
             #000${entity.first} | ${entity.second} | ${entity.third}
         """.trimIndent()
     }
-}
 
 fun imprimirDadosTxt(estoque:MutableList<Triple<Long,String, Int>>){
     val file=File("utils/estoque.txt")
