@@ -67,10 +67,11 @@ fun editarItens(){
     println("Bem vindo a edição de itens")
     println("Digite o identificador:")
     val id = readln().toInt()
-    println("Digite o nome do item:")
-    val nome = readln()
-    println("Digite a quantidade do item:")
-    val qtdEmEstoque = readln().toInt()
+    println("Digite o nome do item: (Se não deseja alterar, deixe em branco)")
+    var nome = readln()
+    nome = if (nome == "") estoque[id-1].second else nome
+    println("Digite a quantidade do item: (Se não deseja alterar, deixe em branco)")
+    val qtdEmEstoque = readln().toIntOrNull() ?:estoque[id-1].third
 
     try {
         if (id>estoque.size||id<0){
