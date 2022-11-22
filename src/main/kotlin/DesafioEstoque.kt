@@ -141,9 +141,8 @@ fun imprimirDadosTxt(estoque:MutableList<Triple<Long,String, Int>>){
     val filter = estoque.filter { (it.third == 0).not() }
 
     filter.forEach {
-        file.appendText(print(it)+"\n")
+        file.appendText(print(it)+"\n\n")
     }
 
-    println("\n\n")
 }
 
