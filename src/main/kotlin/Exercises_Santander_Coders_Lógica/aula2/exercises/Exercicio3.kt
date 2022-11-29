@@ -1,4 +1,4 @@
-package Exercises_Santander_Coders.aula2.exercises
+package Exercises_Santander_Coders_Lógica.aula2.exercises
 
 /*
 *   TODO:3 - Faça um programa que receba a idade de um nadador e imprima a sua categoria seguindo as regras:

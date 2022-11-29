@@ -1,10 +1,7 @@
-package Exercises_Santander_Coders.aula1
+package Exercises_Santander_Coders_Lógica.aula1
 
 import java.io.File
-import java.io.InputStream
 import java.lang.StringBuilder
-import java.nio.charset.Charset
-import java.util.*
 
 /*TODO:
    3 - Gerador de usuarios.

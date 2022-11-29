@@ -1,4 +1,4 @@
-package Exercises_Santander_Coders.aula2.exercises
+package Exercises_Santander_Coders_Lógica.aula2.exercises
 
 /*
 * TODO:5 - Faça um programa que leia um nome de usuário e a sua senha e não aceite a senha igual ao nome do usuário,

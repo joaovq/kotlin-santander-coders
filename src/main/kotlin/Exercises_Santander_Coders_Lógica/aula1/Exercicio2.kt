@@ -1,4 +1,4 @@
-package Exercises_Santander_Coders.aula1
+package Exercises_Santander_Coders_Lógica.aula1
 
 /* TODO:2 - Faça um algoritimo que leia a base e a altura de um triangulo e calcule a sua area.
        F => base*altura/2

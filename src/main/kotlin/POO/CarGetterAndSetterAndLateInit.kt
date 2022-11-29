@@ -11,6 +11,9 @@ fun main(args: Array<String>) {
     println("Max speed is ${car.maxSpeed}")
 //  TODO: Não podemos assinar fora da classe pois o set é privado
 //    car.myModel = "M3"
+    val carModel = CarModel()
+    val (name) = carModel.copy()
+    carModel.toString()
 }
 
 
@@ -37,4 +40,12 @@ class Car(){
 //        TODO:Se fizer isso, torna-se desnecessário o late init
 //        this.owner = "Frank"
     }
+
+    override fun toString(): String {
+        return "Car(owner='$owner', myBrand='$myBrand', maxSpeed=$maxSpeed, myModel='$myModel')"
+    }
+
 }
+data class CarModel(var name:String  = "M3",
+                    var maxSpeed:Int = 120
+                    )

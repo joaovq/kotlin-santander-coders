@@ -1,4 +1,4 @@
-package Exercises_Santander_Coders.aula2.exercises
+package Exercises_Santander_Coders_Lógica.aula2.exercises
 
 /*
 * TODO:2 - Faça um programa que receba o ano de nascimento de uma pessoa, o ano atual e calcule e imprima:>

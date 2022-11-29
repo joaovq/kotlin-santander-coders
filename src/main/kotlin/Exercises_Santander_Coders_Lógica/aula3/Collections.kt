@@ -1,6 +1,8 @@
 
 fun main() {
     val mutableList: MutableList<Int> = mutableListOf(1,2,3,4)
+    val a = arrayOf(12,3,4,5)
+    val b = listOf(1,3,4,5,*a)
 
     var exemplo: MutableList<Int> = mutableList
 
@@ -14,7 +16,7 @@ fun main() {
     println(exemplo)
     val list : List<Int> = listOf(1)
 
-    val set: MutableSet<String> = mutableSetOf("assadsda")
+    val set: MutableSet<String> = mutableSetOf(elements = arrayOf("ahs", "jdsahfs", "adsdas", "jadshbj"))
     val set2: Set<String> = setOf()
 
     set.add("Aha")
@@ -22,6 +24,8 @@ fun main() {
     set.removeIf {
         it.contains(",")
     }
+
+    println(set)
 //    limpar
     set.clear()
 //    Remover
@@ -29,6 +33,8 @@ fun main() {
 
     set.forEach {
         println(it)
+//        ver se é menor que o parametro passado
+//        it.coerceAtLeast("fdg");
     }
 //    retorna um hashcode
     set.hashCode()
@@ -63,10 +69,12 @@ use o operador spread (prefixe o array com *):
 
 */
 
-fun teste(vararg args:Array<String>){
+
+
+fun teste(vararg args:Int){
 
 }
 
-fun teste(vararg args: ()->Unit){
+fun teste(args: ()->Unit){
 
 }

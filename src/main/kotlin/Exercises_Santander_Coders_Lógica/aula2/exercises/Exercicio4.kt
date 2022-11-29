@@ -1,4 +1,4 @@
-package Exercises_Santander_Coders.aula2.exercises
+package Exercises_Santander_Coders_Lógica.aula2.exercises
 
 /*
 *   TODO: - Faça um programa que peça uma nota, entre zero e dez. Mostre uma mensagem caso o valor seja inválido

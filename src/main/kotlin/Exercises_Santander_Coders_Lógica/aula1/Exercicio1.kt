@@ -1,4 +1,4 @@
-package Exercises_Santander_Coders.aula1
+package Exercises_Santander_Coders_Lógica.aula1
 
 /*
 * TODO:

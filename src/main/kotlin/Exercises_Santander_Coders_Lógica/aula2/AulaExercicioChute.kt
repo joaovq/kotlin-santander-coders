@@ -1,7 +1,4 @@
-package Exercises_Santander_Coders.aula2
-
-import kotlin.random.Random
-import kotlin.random.nextInt
+package Exercises_Santander_Coders_Lógica.aula2
 
 fun main(args: Array<String>) {
     println("Digite o mínimo:")

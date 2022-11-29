@@ -5,6 +5,8 @@ fun main(args: Array<String>) {
 //   TODO: Construtor Vazio somente possivel com valores padrões
     var denis = Person()
     Person(lastName = "Queiroz")
+
+
 //    TODO:Não pode criar sozinho
 //    Person(age = 32)
 
@@ -29,6 +31,7 @@ class Person(firstName:String = "Denis", lastName:String = "Panjuta"){
     constructor(firstName: String, lastName: String,age:Int):this(firstName, lastName){
         this.age = age
     }
+
 
     fun stateHobby(){
         println("$firstName\'s hobby is $hobby")

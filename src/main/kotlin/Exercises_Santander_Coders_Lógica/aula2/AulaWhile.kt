@@ -1,4 +1,4 @@
-package Exercises_Santander_Coders.aula2
+package Exercises_Santander_Coders_Lógica.aula2
 
 
 
