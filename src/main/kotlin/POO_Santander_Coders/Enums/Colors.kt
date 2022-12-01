@@ -1,9 +1,10 @@
 package POO_Santander_Coders.Enums
 
-import org.w3c.dom.css.RGBColor
-import javax.swing.plaf.synth.ColorType
-
-enum class Color(val nameColor:String,val hex:String,val rgb:String){
+enum class Colors(
+        val nameColor:String,
+        val hex:String,
+        val rgb:String
+){
         VERMELHO(nameColor = "Vermelho", hex = "#eb4034", rgb = "235, 64, 52") {
                 override fun transformarNomeEmUpperCase():String {
                         return "VERMELHO"
@@ -31,6 +32,11 @@ enum class Color(val nameColor:String,val hex:String,val rgb:String){
         abstract fun transformarNomeEmUpperCase() :String
 
 }
+data class Color(
+        val nameColor:String,
+        val hex:String,
+        val rgb:String
+)
 
 enum class Status{
         ONLINE,
@@ -40,10 +46,10 @@ enum class Status{
 
 fun main(args: Array<String>) {
 //      Color enum
-        println(Color.BRANCO)
-        println(Color.VERMELHO)
-        println(Color.VERDE)
-        println(Color.PRETO)
+        println(Colors.BRANCO)
+        println(Colors.VERMELHO)
+        println(Colors.VERDE)
+        println(Colors.PRETO)
 //        Status Enum
         println(Status.ONLINE.ordinal)
         println(Status.ONLINE)

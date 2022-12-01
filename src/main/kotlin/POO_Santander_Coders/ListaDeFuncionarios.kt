@@ -1,6 +1,11 @@
 package POO_Santander_Coders
 
-class Funcionario(var name:String,
+import java.text.NumberFormat
+import java.util.*
+
+private val currencyFormatter = NumberFormat.getCurrencyInstance(Locale.forLanguageTag("pt-BR"))
+class Funcionario(
+    var name:String,
                   var role:String = "Funcionary",
                   var cpf:String,
                   var email:String,
@@ -19,4 +24,17 @@ class Funcionario(var name:String,
     fun decreaseSalary(wage: Double){
         this.wage = wage
     }
+
+    override fun toString(): String {
+        return "Funcionario(" +
+                "name='$name'," +
+                " role='$role'," +
+                " cpf='$cpf'," +
+                " email='$email'," +
+                " enterprise='$enterprise'," +
+                " wage=${currencyFormatter.format(wage)}" +
+                ")"
+    }
+
+
 }
