@@ -25,7 +25,11 @@ enum class Categoria(var produtos:MutableList<String>){
 
 }
 
-class Carrinho(){
+data class ProdutoPadaria(val nome: String, val valor:Double){
+
+}
+
+class Carrinho(val produtos: MutableMap<ProdutoPadaria,Double> = mutableMapOf()){
 
 }
 
