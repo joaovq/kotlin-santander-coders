@@ -22,6 +22,10 @@ fun main(args: Array<String>) {
 
 data class Estoque(val listaDeProdutos: MutableList<Produto> = mutableListOf()){
 
+    init {
+        println("Seja Bem vindo ao nosso controle de estoque!!")
+    }
+
     fun exibirMenu(){
         println("""
         

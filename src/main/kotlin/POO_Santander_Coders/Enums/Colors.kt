@@ -1,14 +1,16 @@
 package POO_Santander_Coders.Enums
 
+import java.sql.DriverManager
+import java.sql.PreparedStatement
+
 enum class Colors(
         val nameColor:String,
         val hex:String,
         val rgb:String
 ){
         VERMELHO(nameColor = "Vermelho", hex = "#eb4034", rgb = "235, 64, 52") {
-                override fun transformarNomeEmUpperCase():String {
-                        return "VERMELHO"
-                }
+                override fun transformarNomeEmUpperCase():String = "VERMELHO"
+
         },
         BRANCO(nameColor = "Branco", hex = "#ffffff", rgb = "255, 255, 255") {
                 override fun transformarNomeEmUpperCase() :String{
@@ -55,6 +57,4 @@ fun main(args: Array<String>) {
         println(Status.ONLINE)
         println(Status.OFFLINE.ordinal)
         println(Status.DORMINDO.ordinal)
-
-
 }
