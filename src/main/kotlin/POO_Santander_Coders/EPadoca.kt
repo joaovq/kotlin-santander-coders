@@ -4,6 +4,9 @@ import java.lang.IndexOutOfBoundsException
 import java.text.NumberFormat
 import java.util.Locale
 
+private const val PADOCA5 = "5PADOCA"
+private const val PADOCA10 = "10PADOCA"
+private const val OFF5 = "5OFF"
 private fun currencyFormatterBr(number:Double) :String{
     val currencyInstance = NumberFormat.getCurrencyInstance(Locale.forLanguageTag("pt-br"))
     return currencyInstance.format(number)
@@ -11,7 +14,15 @@ private fun currencyFormatterBr(number:Double) :String{
 
 fun main(args: Array<String>) {
     val padaria = Padaria("São Miguel")
-    padaria.exibirMenu()
+    var terminarPedido = false
+   do{
+       padaria.exibirMenu()
+       println("Deseja fechar o seu pedido? (S/N)")
+       val resposta = readln()
+       if (resposta.equals("S", true))
+           terminarPedido=true
+   }while (!terminarPedido)
+   println("\nVolte sempre!!!")
 }
 
 data class Padaria(
@@ -56,6 +67,7 @@ data class Padaria(
         categoria.produtos.forEachIndexed{
             index, produto ->  println("${index+1} - ${produto.nome} - R$ ${produto.valor}")
         }
+        println("0 - VOLTAR")
         escolherProduto(categoria)
     }
     fun escolherProduto(categoria: Categoria){
@@ -84,6 +96,22 @@ data class Padaria(
         }
         exibirMenu()
     }
+    fun aplicarCupom(){
+        println("Insira o nome do cupom: ")
+        val resposta=readln()
+        val desconto=when(resposta){
+            PADOCA5-> Cupom.PADOCA5.desconto
+            PADOCA10-> Cupom.PADOCA10.desconto
+            OFF5-> Cupom.OFF5.desconto
+            else -> {
+                println(
+                    "Cupom requisitado não existe," +
+                        " ou é inválido para este dia"
+                )
+                null
+            }
+        }
+    }
 }
 
 enum class Categoria(var produtos:MutableList<ProdutoPadaria>){
@@ -104,13 +132,9 @@ enum class Categoria(var produtos:MutableList<ProdutoPadaria>){
 
 }
 
-data class ProdutoPadaria(val nome: String, val valor:Double){
+data class ProdutoPadaria(val nome: String, val valor:Double)
 
-}
-
-class Carrinho(val produtos: MutableMap<ProdutoPadaria,Int> = mutableMapOf()){
-
-}
+class Carrinho(val produtos: MutableMap<ProdutoPadaria,Int> = mutableMapOf())
 
 enum class Cupom(var desconto:Double){
     PADOCA5(desconto = 0.05),
