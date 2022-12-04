@@ -4,12 +4,15 @@ import java.lang.IndexOutOfBoundsException
 import java.text.NumberFormat
 import java.util.Locale
 
-private const val PADOCA5 = "5PADOCA"
-private const val PADOCA10 = "10PADOCA"
-private const val OFF5 = "5OFF"
-private fun currencyFormatterBr(number:Double) :String{
+//@author joaovq
+
+private fun currencyFormatterBr(number:Double) :String {
     val currencyInstance = NumberFormat.getCurrencyInstance(Locale.forLanguageTag("pt-br"))
     return currencyInstance.format(number)
+}
+//Extensão da função currency formatter
+private fun Double.currencyFormatter() :String{
+    return currencyFormatterBr(this)
 }
 
 fun main(args: Array<String>) {
@@ -22,6 +25,7 @@ fun main(args: Array<String>) {
        if (resposta.equals("S", true))
            terminarPedido=true
    }while (!terminarPedido)
+    padaria.exibirComanda()
    println("\nVolte sempre!!!")
 }
 
@@ -30,6 +34,8 @@ data class Padaria(
     var categorias:MutableList<Categoria> = mutableListOf(Categoria.PAES, Categoria.SALGADOS,Categoria.DOCES),
     var carrinho: Carrinho = Carrinho()
 ){
+
+    private var total = 0.0
     init {
         println("Bem vindo a padaria $nome. O que deseja?")
     }
@@ -73,16 +79,22 @@ data class Padaria(
     fun escolherProduto(categoria: Categoria){
         println("Faça sua escolha.")
         val escolha=readln().toInt()
-        println("Qual a quantidade que deseja?.")
-        val qtd=readln().toInt()
         when(escolha){
+            0-> return
             in 1 .. categoria.produtos.size-> {
+                    println("Qual a quantidade que deseja?.")
+                    val qtd=readln().toInt()
                     val produto = carrinho.produtos
-                    produto.put(categoria.produtos[escolha-1], qtd)
+                    if (!produto.containsKey(categoria.produtos[escolha-1])){
+                        produto[categoria.produtos[escolha - 1]] = qtd
+                    }
+                    else{
+                        val valorAtual = produto[categoria.produtos[escolha - 1]]
+                        produto[categoria.produtos[escolha - 1]] = qtd.plus(valorAtual!!)
+                    }
             }
             else->throw IndexOutOfBoundsException("Este produto não existe")
         }
-        exibirComanda()
     }
 
     fun exibirComanda(){
@@ -93,24 +105,34 @@ data class Padaria(
                     "- ${it.value} " +
                     "- ${currencyFormatterBr(it.key.valor*it.value)}"
             )
+            total+= (it.key.valor*it.value)
         }
-        exibirMenu()
+        println("Total da conta: ${total.currencyFormatter()}")
+        val desconto = aplicarCupom()
+        if (desconto>0.0){
+            println("\nValor total com desconto : ${desconto.currencyFormatter()}")
+        }
     }
-    fun aplicarCupom(){
+    fun aplicarCupom():Double{
+        println("Deseja aplicar cupom? (S/N)")
+        val escolha = readln()
+        if (escolha.equals("N", true))
+            return 0.0
         println("Insira o nome do cupom: ")
         val resposta=readln()
-        val desconto=when(resposta){
-            PADOCA5-> Cupom.PADOCA5.desconto
-            PADOCA10-> Cupom.PADOCA10.desconto
-            OFF5-> Cupom.OFF5.desconto
+        val desconto=when(resposta.uppercase()){
+            Cupom.CUPOMPADOCA5-> total-(total*Cupom.PADOCA5.desconto)
+            Cupom.CUPOMPADOCA10-> total-(total*Cupom.PADOCA10.desconto)
+            Cupom.CUPOMOFF5->total-Cupom.OFF5.desconto
             else -> {
                 println(
                     "Cupom requisitado não existe," +
                         " ou é inválido para este dia"
                 )
-                null
+                aplicarCupom()
             }
         }
+        return desconto
     }
 }
 
@@ -138,6 +160,16 @@ class Carrinho(val produtos: MutableMap<ProdutoPadaria,Int> = mutableMapOf())
 
 enum class Cupom(var desconto:Double){
     PADOCA5(desconto = 0.05),
-    PADOCA10(desconto = 0.05),
-    OFF5(desconto = 0.05);
+    PADOCA10(desconto = 0.10),
+    OFF5(desconto = 5.0);
+//    Objeto de classe, estático
+    companion object{
+         const val CUPOMPADOCA5 = "5PADOCA"
+         const val CUPOMPADOCA10 = "10PADOCA"
+         const val CUPOMOFF5 = "5OFF"
+    }
+//    Objeto de instância test
+    object test {
+
+    }
 }
