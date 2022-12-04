@@ -98,12 +98,20 @@ data class Padaria(
     }
 
     fun exibirComanda(){
+        println("""
+        ====================Comanda E-padoca=======================
+        ===========================================================
+        item.......Produto..........Qtd.......Valor...........Total
+        ===========================================================
+    """.trimIndent())
+
         carrinho.produtos.forEach{
             println(
-                    "${it.key.nome} " +
-                    "- ${currencyFormatterBr(it.key.valor)} " +
-                    "- ${it.value} " +
-                    "- ${currencyFormatterBr(it.key.valor*it.value)}"
+                "${carrinho.produtos.keys.indexOf(it.key)+1}"+
+                    ".......${it.key.nome}.........." +
+                    "${currencyFormatterBr(it.key.valor)}......." +
+                    "${it.value}..........." +
+                        currencyFormatterBr(it.key.valor*it.value)
             )
             total+= (it.key.valor*it.value)
         }
