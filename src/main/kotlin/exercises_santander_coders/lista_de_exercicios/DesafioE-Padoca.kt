@@ -1,12 +1,14 @@
 package exercises_santander_coders.lista_de_exercicios
-
-
 val carrinho: MutableMap<String,MutableList<Double>> = mutableMapOf()
 var total = 0.00
+//Pode utilizar esse no ligar do map, so que não é uma lista
+var pair:Pair<Long, String> = Pair(1, "Joao")
+var triple:Triple<Long, String, Int> = Triple(1, "Joao", 2)
 
 fun main(args: Array<String>) {
     println("Seja bem vindo a nossa E-Padoca!! ")
     menu()
+
 }
 
 fun menu(){
@@ -41,7 +43,9 @@ fun menu(){
         2-> {
             mostrarSalgados()
         }
-        3-> {mostrarDoces()}
+        3-> {
+            mostrarDoces()
+        }
         else -> {
             println("Resposta Inválida\n")
             menu()
