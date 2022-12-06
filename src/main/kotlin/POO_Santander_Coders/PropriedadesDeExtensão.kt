@@ -3,8 +3,7 @@ package POO_Santander_Coders
 fun main(args: Array<String>) {
 
 }
-data class Nota(val valor:Double, val total:Double){
-}
+data class Nota(val valor:Double, val total:Double)
 
 val List<Nota>.mediaPercentual: Double
     get() {
@@ -21,3 +20,4 @@ val List<Nota>.mediaPercentual: Double
 
         return totalRecebido/(totalDistibuido*100)
     }
+
