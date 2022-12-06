@@ -5,18 +5,22 @@ import kotlin.random.nextInt
 
 
 fun main(args: Array<String>) {
-    val peixe:Aquario.Peixe = Aquario.Peixe("dourado", "laranja", 20)
+    val peixe:Aquario.Peixe = Aquario.Peixe("dourado", "laranja", Aquario.TamanhoPeixe.PEQUENO)
+    val peixe1:Aquario.Peixe = Aquario.Peixe("voador", "cinza", Aquario.TamanhoPeixe.MEDIO)
 }
 
-enum class PeixesPadrão{
-    DOURADO,
-    VOADOR
-}
+
 class Aquario(private val peixes:MutableList<Peixe> = mutableListOf()){
 
     private var aquarioEstaSujo:Boolean = false
 
-    data class Peixe(var nome:String, var cor:String, var tamanho:Int)
+    enum class TamanhoPeixe{
+        PEQUENO,
+        MEDIO,
+        GRANDE;
+    }
+
+    data class Peixe(var nome:String, var cor:String, var tamanho:TamanhoPeixe)
 
     fun adicionarPeixes(peixe:Peixe){
         if (aquarioEstaSujo.not()) peixes.add(peixe) else println("Não é possivel adicionar peixes com o aquario sujo.")
