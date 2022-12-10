@@ -6,7 +6,7 @@ import kotlin.random.nextInt
 
 fun main(args: Array<String>) {
     val aquario = Aquario()
-    aquario.mostrarPainel()
+    aquario.escolherOpcoesMenu()
 
 
 }
@@ -50,19 +50,48 @@ class Aquario(
         var tamanho:TamanhoPeixe = TamanhoPeixe.PEQUENO
     )
 
+    private fun mostrarMenu(){
+        val opcoes = Opcao.values()
 
-    fun mostrarPainel(){
+        opcoes.forEachIndexed { index, opcao ->
+            println("${index+1} - ${opcao.mostrarAcao()}")
+        }
+        println("0 - Sair do aquário!")
+    }
+    enum class Opcao(val acao:String){
+        ALIMENTAR(acao ="Alimentar os peixes") {
+            override fun mostrarAcao():String {
+                return acao
+            }
+        },
+        ADICIONAR(acao ="Adicionar peixes") {
+            override fun mostrarAcao():String {
+                return acao
+            }
+        },
+        LIMPAR_AQUARIO(acao ="Limpar aquario") {
+            override fun mostrarAcao():String {
+                return acao
+            }
+        },
+        MOSTRAR_PEIXES(acao ="Mostrar os peixes do aquario") {
+            override fun mostrarAcao():String {
+                return acao
+            }
+        }
+        ;
+
+
+        abstract fun mostrarAcao():String
+        override fun toString(): String {
+            return "Opcao(acao='$acao')"
+        }
+    }
+
+    fun escolherOpcoesMenu(){
         var programaAtivo = true
         do {
-            println("""
-            
-            1 - Alimentar os peixes
-            2 - Adicionar peixes
-            3 - Limpar aquario
-            4 - Mostrar os peixes aquario
-            0 - Sair do programa
-            
-        """.trimIndent())
+            mostrarMenu()
             println("Digite a opcao desejada: ")
             val opcao = readln().toIntOrNull()
             when(opcao){
@@ -83,7 +112,7 @@ class Aquario(
                 }
                 else->{
                     println("Opção inválida")
-                    mostrarPainel()
+                    escolherOpcoesMenu()
                 }
             }
         }while (programaAtivo)
