@@ -1,4 +1,4 @@
-package POO_Santander_Coders
+package POO_Santander_Coders.Exercicios
 
 class AnimalDeEstimacao(var nome:String? = null,var raca:String? = null){
 
@@ -11,7 +11,7 @@ class AnimalDeEstimacao(var nome:String? = null,var raca:String? = null){
     }
     inner class Tutor(
         name:String = "Guest",
-        animal: AnimalDeEstimacao = AnimalDeEstimacao()?: AnimalDeEstimacao(
+        animal: AnimalDeEstimacao = AnimalDeEstimacao() ?: AnimalDeEstimacao(
             nome = "Jubile", raca = "Papagaio"
         )
     ){
@@ -21,7 +21,7 @@ class AnimalDeEstimacao(var nome:String? = null,var raca:String? = null){
         private var id:Long = 0
     }
 
-    private fun getTutor():Tutor{
+    private fun getTutor(): Tutor {
         val tutor = Tutor()
         return tutor
     }
