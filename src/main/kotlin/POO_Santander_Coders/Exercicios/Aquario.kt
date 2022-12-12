@@ -14,7 +14,8 @@ fun main(args: Array<String>) {
 
 class Aquario(
     val peixes:MutableList<Peixe> = mutableListOf(),
-    val parametroDeLimpeza:Int = 3
+    val parametroDeLimpeza:Int = 3,
+    var capacidade: Capacidade = Capacidade.PEQUENO
 ) {
     var condicaoDeLimpeza:Int
 
@@ -29,6 +30,12 @@ class Aquario(
             get() {
                 return "Mar vermelho"
             }
+    }
+
+    enum class Capacidade(val capacidade: Int){
+        PEQUENO(capacidade = 5),
+        MEDIO(capacidade = 10),
+        GRANDE(capacidade = 15);
     }
 
     object test{
@@ -78,8 +85,12 @@ class Aquario(
             override fun mostrarAcao():String {
                 return acao
             }
-        }
-        ;
+        },
+        FAZER_UPGRADE(acao = "Fazer upgrade do aquario") {
+            override fun mostrarAcao(): String {
+                return acao
+            }
+        };
 
 
         abstract fun mostrarAcao():String
@@ -107,6 +118,9 @@ class Aquario(
                 4-> {
                     mostrarPeixes()
                 }
+                5-> {
+                    aumentarCapacidade()
+                }
                 0-> {
                     programaAtivo = false
                 }
@@ -120,7 +134,16 @@ class Aquario(
         println("Até a próxima!!")
     }
 
-
+    private fun aumentarCapacidade(){
+        println("Digite para qual capacidade aumentar: ")
+        when(capacidade){
+            Capacidade.PEQUENO->capacidade=Capacidade.MEDIO
+            Capacidade.MEDIO->capacidade=Capacidade.GRANDE
+            else -> {
+                println("O aquario já esta na sua capacidade máxima")
+            }
+        }
+    }
 
     private fun adicionarPeixes(){
 
@@ -143,15 +166,18 @@ class Aquario(
                 adicionarPeixes()
             }
         }
-        if (aquarioEstaSujo.not())
+        if (aquarioEstaSujo.not() && peixes.size<capacidade.capacidade)
         {
             peixe.nome = nome
             peixe.cor = cor
             peixe.tamanho = tamanhoEnum
             peixes.add(peixe)
         }
-        else {
+        else if (peixes.size<capacidade.capacidade){
             println("Não é possivel adicionar peixes com o aquario sujo.")
+        }
+        else {
+            println("O aquario está cheio, faça o upgrade se possivel.")
         }
 
         aquarioEstaSujo = (peixes.size % condicaoDeLimpeza == 0)
