@@ -15,7 +15,7 @@ fun main(args: Array<String>) {
 class Aquario(
     val peixes:MutableList<Peixe> = mutableListOf(),
     val parametroDeLimpeza:Int = 3,
-    var capacidade: Capacidade = Capacidade.PEQUENO
+    private var capacidade: Capacidade = Capacidade.PEQUENO
 ) {
     var condicaoDeLimpeza:Int
 
@@ -135,7 +135,7 @@ class Aquario(
     }
 
     private fun aumentarCapacidade(){
-        println("Digite para qual capacidade aumentar: ")
+        println("Tentando aumentar a capacidade...")
         when(capacidade){
             Capacidade.PEQUENO->capacidade=Capacidade.MEDIO
             Capacidade.MEDIO->capacidade=Capacidade.GRANDE
