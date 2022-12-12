@@ -7,8 +7,6 @@ import kotlin.random.nextInt
 fun main(args: Array<String>) {
     val aquario = Aquario()
     aquario.escolherOpcoesMenu()
-
-
 }
 
 
