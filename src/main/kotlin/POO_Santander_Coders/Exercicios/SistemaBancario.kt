@@ -4,185 +4,168 @@ fun main(args: Array<String>) {
 
 }
 
-interface Conta{
-    fun pagueBoleto()
-}
-
-interface ContaDigital:Conta{
-    override fun pagueBoleto() {
-        TODO("Not yet implemented")
-    }
-    fun transferenciaPix()
-    fun investir()
-    fun guardar()
-}
-interface ContaNormal:Conta{
-   fun saque()
-   fun deposito()
-}
-
 private abstract class PessoaFisica(
     open var nome:String,
-    open var sobrenome:String
+    open var sobrenome:String,
+    open val cpf:String
 )
 
-enum class Plano(nome: String){
-    NORMAL(nome = "normal"),
-    DIGITAL(nome = "digital"),
-    PREMIUM(nome = "premium");
+enum class Plano(var nome: String,var  carteiraFisica: CarteiraFisica? = null,var carteiraDigital: CarteiraDigital? = null){
+    NORMAL(nome = "normal", carteiraFisica = CarteiraFisica()),
+    DIGITAL(nome = "digital", carteiraDigital = CarteiraDigital()),
+    PREMIUM(nome = "premium", carteiraFisica = CarteiraFisica(), carteiraDigital = CarteiraDigital());
 }
 
 private abstract class Cliente(
     override var nome: String,
     override var sobrenome: String,
-    open val plano:Plano
-    ):PessoaFisica(nome, sobrenome){
-
-
-}
+    override val cpf: String,
+    protected open var senha:String
+    ):PessoaFisica(nome, sobrenome, cpf){
+    protected abstract val plano: Plano
+    }
 private data class ClienteNormal(
     override var nome: String,
     override var sobrenome: String,
-    override val plano:Plano
-):Cliente(nome, sobrenome, plano), CarteiraFisica{
-    override fun pagueBoleto() {
-        TODO("Not yet implemented")
+    override val cpf: String,
+    override var senha: String
+):Cliente(nome, sobrenome, cpf, senha){
+
+    override val plano = Plano.NORMAL
+    val carteiraFisica = plano.carteiraFisica!!
+
+    fun pagueBoleto(valorBoleto: Double){
+        carteiraFisica.pagueBoleto(valorBoleto)
     }
 
-    override fun saque() {
-        super.saque()
+    fun deposito(valor: Double){
+        carteiraFisica.deposito(valor)
     }
 
-    override fun deposito() {
-        super.deposito()
+    fun saque(valor: Double){
+        carteiraFisica.saque(valor)
     }
 
-    override val senha: String
-        get() = super.senha
-    override val tipo: String
-        get() = super.tipo
-    override val saldo: Double
-        get() = super.saldo
-    override val extrato: String
-        get() = super.extrato
 }
 private data class ClientePremium(
     override var nome: String,
     override var sobrenome: String,
-    override val plano:Plano
-):Cliente(nome, sobrenome, plano), CarteiraDigital, CarteiraFisica{
-    override val senha: String
-        get() = TODO("Not yet implemented")
-    override val tipo: String
-        get() = TODO("Not yet implemented")
-    override val saldo: Double
-        get() = TODO("Not yet implemented")
-    override val extrato: String
-        get() = TODO("Not yet implemented")
+    override val cpf: String,
+    override var senha: String
+):Cliente(nome, sobrenome, cpf, senha) {
 
-    override fun saque() {
-        super.saque()
+    override val plano: Plano = Plano.PREMIUM
+    val carteiraFisica = plano.carteiraFisica!!
+    val carteiraDigital =plano.carteiraDigital!!
+
+    fun pagueBoleto(valorBoleto: Double){
+        carteiraDigital.pagueBoleto(valorBoleto)
     }
 
-    override fun deposito() {
-        super.deposito()
+    fun deposito(valor: Double){
+        carteiraFisica.deposito(valor)
     }
 
-    override fun pagueBoleto() {
-        super.pagueBoleto()
+    fun saque(valor: Double){
+        carteiraFisica.saque(valor)
     }
 
-    override fun transferenciaPix() {
-        super.transferenciaPix()
+    fun transferenciaPix(valor: Double){
+        carteiraDigital.transferenciaPix(valor)
     }
 
-    override fun investir() {
-        super.investir()
+    fun guardar(valor: Double){
+        carteiraDigital.guardar(valor)
     }
 
-    override fun guardar() {
-        super.guardar()
-    }
+
 }
+
 private data class ClienteDigital(
     override var nome: String,
     override var sobrenome: String,
-    override val plano:Plano
-):Cliente(nome, sobrenome, plano), CarteiraDigital{
-    override val tipo: String
-        get() = super.tipo
-    override val saldo: Double
-        get() = super.saldo
-    override val extrato: String
-        get() = super.extrato
+    override val cpf: String,
+    override var senha: String
+):Cliente(nome, sobrenome, cpf, senha){
 
-    override fun pagueBoleto() {
-        super.pagueBoleto()
+    override val plano = Plano.DIGITAL
+        get() = field
+
+    val carteiraDigital: CarteiraDigital = plano.carteiraDigital!!
+
+    fun pagueBoleto(valorBoleto: Double){
+        carteiraDigital.pagueBoleto(valorBoleto)
     }
 
-    override fun transferenciaPix() {
-        super.transferenciaPix()
+
+    fun transferenciaPix(valor: Double){
+        carteiraDigital.transferenciaPix(valor)
     }
 
-    override fun investir() {
-        super.investir()
-    }
-
-    override fun guardar() {
-        super.guardar()
+    fun guardar(valor: Double){
+        carteiraDigital.guardar(valor)
     }
 }
- interface Carteira{
+
+interface Carteira{
      val senha: String
      val tipo:String
      val saldo:Double
      val extrato:String
+
+     fun pagueBoleto(valor: Double){
+         println("Pagamento de boleto efetuado de valor $valor")
+     }
 }
 
-interface CarteiraFisica:Carteira, ContaNormal{
+open class CarteiraFisica() :Carteira{
 
 
-    override fun saque() {
-        TODO("Not yet implemented")
+    override var senha: String = ""
+    override var tipo: String  = ""
+    override var saldo: Double = 0.0
+    override val extrato: String = ""
+    fun saque(valor: Double){
+        if (saldo.minus(valor)>0.0){
+            this.saldo=saldo.minus(valor)
+            saldo=0.0
+            println("Saque efetuado.")
+        }
+        else{
+            println("Não é possível fazer saque co")
+        }
     }
-
-    override fun deposito() {
-        TODO("Not yet implemented")
+    fun deposito(valor: Double){
+        saldo = saldo.plus(valor)
+        println("Deposito de $valor foi efetuado")
     }
-
-    override val senha: String
-        get() = ""
-    override val tipo: String
-        get() = TODO("Not yet implemented")
-    override val saldo: Double
-        get() = TODO("Not yet implemented")
-    override val extrato: String
-        get() = TODO("Not yet implemented")
 }
-interface CarteiraDigital:Carteira, ContaDigital{
-    override val senha: String
-        get() = TODO("Not yet implemented")
-    override val tipo: String
-        get() = TODO("Not yet implemented")
-    override val saldo: Double
-        get() = TODO("Not yet implemented")
-    override val extrato: String
-        get() = TODO("Not yet implemented")
+open class CarteiraDigital:Carteira{
 
-    override fun pagueBoleto() {
-        TODO("Not yet implemented")
+    override var senha: String = ""
+    override var tipo: String = ""
+    override var saldo: Double = 0.0
+    override val extrato: String = ""
+
+    open fun transferenciaPix(valor: Double){
+        println("Transferencia de pix realizada, valor: $valor")
     }
+    open fun investir(valor:Double){
+        if (saldo.minus(valor)>0.0){
+            this.saldo=saldo.minus(valor)
+            saldo=0.0
+            println("Investindo o dinheiro $valor")
+        }
+        else{
+            println("Deposite mais dinheiro para investir")
+        }
 
-    override fun transferenciaPix() {
-        TODO("Not yet implemented")
+
     }
-
-    override fun investir() {
-        TODO("Not yet implemented")
+    open fun guardar(valor: Double){
+        saldo = saldo.plus(valor)
+        println("O valor de $valor foi guardado")
     }
-
-    override fun guardar() {
-        TODO("Not yet implemented")
-    }
-
 }
+
+
