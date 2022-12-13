@@ -36,10 +36,7 @@ private abstract class Cliente(
     override var nome: String,
     override var sobrenome: String,
     open val plano:Plano
-    ):PessoaFisica(
-    nome,
-    sobrenome
-    ){
+    ):PessoaFisica(nome, sobrenome){
 
 
 }
