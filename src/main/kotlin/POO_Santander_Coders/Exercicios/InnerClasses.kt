@@ -1,5 +1,7 @@
 package POO_Santander_Coders.Exercicios
 
+import POO_Santander_Coders.Exercicios.SealedClass.Pessoa
+
 class AnimalDeEstimacao(var nome:String? = null,var raca:String? = null){
 
     class Responsavel(){
@@ -36,4 +38,13 @@ fun main(args: Array<String>) {
 //    AnimalDeEstimacao.Tutor()
 //    Conseguimos acessar uma inner Class se existir uma instância da classe.
     AnimalDeEstimacao().Tutor()
+
+    //    Cannot create an instance of an abstract class
+//    Pessoa("Joao", cpf = "17921")
+
+//    Nested class podemos instanciar fora da classe sem ter uma instancia da classe externa
+    Pessoa.PessoaFisica()
+
+//    Para inner class Não podemos instanciar sem uma instancia da classe pessoa, se não for dentro da classe externa
+//    Pessoa.PessoaJuridica()
 }
