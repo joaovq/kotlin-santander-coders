@@ -1,6 +1,5 @@
 package POO_Santander_Coders.Exercicios
 
-import POO_Santander_Coders.Exercicios.SealedClass.Pessoa
 
 class AnimalDeEstimacao(var nome:String? = null,var raca:String? = null){
 
