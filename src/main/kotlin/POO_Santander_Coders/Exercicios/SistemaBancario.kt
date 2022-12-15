@@ -17,7 +17,7 @@ fun Double.currencyFormatterBr():String{
 
 fun String.concat(appendable: String):String{
     val stringBuilder = StringBuilder(this)
-    stringBuilder.append("\n$appendable\n")
+    stringBuilder.append("\n$appendable")
     return stringBuilder.toString()
 }
 
@@ -35,7 +35,7 @@ fun main(args: Array<String>) {
         this.transferenciaPix(100.0)
         println(this.saldo)
         println(clientePremium.plano)
-        println(extrato)
+        println(extrato+"\n")
     }
 
 
@@ -51,7 +51,7 @@ fun main(args: Array<String>) {
         this.transferenciaPix(100.0)
         println(this.saldo.currencyFormatterBr())
         println(clienteDigital.plano)
-        println(extrato)
+        println(extrato+"\n")
     }
 
     val clienteNormal = ClienteNormal(
@@ -62,11 +62,11 @@ fun main(args: Array<String>) {
     )
 
     with(clienteNormal.carteiraFisica){
-        println(saldo.currencyFormatterBr())
+        println("Seu saldo é: ${saldo.currencyFormatterBr()}")
         this.deposito(5000.0)
         this.saque(3000.0)
         println(saldo.currencyFormatterBr())
-        println(extrato)
+        println(extrato+"\n")
     }
 
 }
