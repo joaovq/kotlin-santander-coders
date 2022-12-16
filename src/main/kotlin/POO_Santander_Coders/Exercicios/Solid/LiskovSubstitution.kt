@@ -3,7 +3,7 @@ package POO_Santander_Coders.Exercicios.Solid
 //*
 // Na substituição de Liskov
 // As interfaces devem ser intercambiaveis
-//
+// Todas as classe filha devem herdar da classe pai
 //
 // */
 
