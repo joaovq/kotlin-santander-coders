@@ -5,7 +5,7 @@ fun main(args: Array<String>) {
 }
 
 fun interface DataSource{
-    fun findById()
+    fun getDataSource()
 }
 
 //Cada função podem implementar uma interface funcional também
