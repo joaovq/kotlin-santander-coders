@@ -19,5 +19,5 @@ fun interface IntPredicate {
 val isEven = IntPredicate { it % 2 == 0 }
 
 fun main() {
-    println("Is 7 even? - ${isEven.accept(7)}")
+    println("Is 7 even? - ${isEven2.accept(7)}")
 }
