@@ -1,5 +1,7 @@
 package POO_Santander_Coders.Exercicios.SAMFunctionals
 
+import java.sql.DriverManager
+
 
 fun interface IntPredicate {
     fun accept(i: Int): Boolean
@@ -20,4 +22,14 @@ val isEven = IntPredicate { it % 2 == 0 }
 
 fun main() {
     println("Is 7 even? - ${isEven.accept(7)}")
+
+    connectionDb.connect()
 }
+
+fun interface ConnectionDb{
+    fun connect()
+}
+
+val connectionDb = ConnectionDb { DriverManager.getConnection("") }
+
+
