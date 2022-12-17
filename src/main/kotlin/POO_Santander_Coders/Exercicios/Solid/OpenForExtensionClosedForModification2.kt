@@ -7,10 +7,10 @@ fun main(args: Array<String>) {
 interface Arquivo{
 
     private fun gerarPdf(){
-        println("gerar pdf ")
+        println("Gerando pdf ")
     }
     private fun gerarWord(){
-        println("gerar pdf ")
+        println("Gerando word ")
     }
 
     fun geradorDeArquivos(arquivos: List<Arquivo>){
