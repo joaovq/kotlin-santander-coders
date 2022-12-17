@@ -62,7 +62,7 @@ fun main(args: Array<String>) {
     )
 
     val pureEmployee = PureEmployee(
-        id = UUID(180, 1000000000000000),
+        id = UUID(180, 100000000),
         name = "Carl",
         title = "TechLead",
         salary = 4000.0
