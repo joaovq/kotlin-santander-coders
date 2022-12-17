@@ -1,6 +1,9 @@
 package POO_Santander_Coders.Exercicios.Solid
 
 fun main(args: Array<String>) {
+    val list:List<Arquivo> = listOf(ArquivoPdf(), ArquivoWord(), ArquivoWord(), ArquivoWord())
+
+    ArquivoPdf().geradorDeArquivos()
 
 }
 
@@ -25,11 +28,19 @@ interface Arquivo{
 
         }
     }
+    fun geradorDeArquivos(){
+            when(this){
+                is ArquivoPdf -> gerarWord()
+                is ArquivoWord -> gerarPdf()
+                else->{
+                    println("Não conseguimos gerar o Arquivo")
+                }
+            }
+    }
 }
 
 class ArquivoPdf:Arquivo{
 }
 class ArquivoWord:Arquivo{
 }
-
 
