@@ -54,8 +54,8 @@ interface EmployeeRepository {
 }
 
 fun main(args: Array<String>) {
-    val value:EmployeeRepository = object :EmployeeRepository {
-        val name = "joao"
+    val value:EmployeeRepository = object :EmployeeRepository{
+
     }
     val functionalEmployeeService = FunctionalEmployeeService(
         value
