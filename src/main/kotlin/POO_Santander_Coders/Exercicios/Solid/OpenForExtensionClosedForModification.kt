@@ -11,7 +11,7 @@ class FunctionalEmployeeService(
 ){
 //    Privada e so pode usar somente aqui na classe
 //    A implementação do repository pode ser somente feita pela classe
-    private fun handleChange(id: UUID, change:PureEmployee.() ->PureEmployee) {
+    private fun handleChange(id: UUID, change: PureEmployee.() -> PureEmployee) {
         employeeRepository.findById(id)
             .change()
             .let { employeeRepository.upsert(it) }
