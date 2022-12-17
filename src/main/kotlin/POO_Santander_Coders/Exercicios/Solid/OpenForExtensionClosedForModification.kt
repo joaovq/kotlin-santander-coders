@@ -6,7 +6,9 @@ import java.util.*
 
 //Se delegarmos o para employee repository, podemos utilizar o repository através da variavel
 //Mas neste caso, não é o objetivo
-class FunctionalEmployeeService(private val employeeRepository: EmployeeRepository){
+class FunctionalEmployeeService(
+    private val employeeRepository: EmployeeRepository
+){
 //    Privada e so pode usar somente aqui na classe
 //    A implementação do repository pode ser somente feita pela classe
     private fun handleChange(id: UUID, change:PureEmployee.() ->PureEmployee) {
@@ -24,9 +26,12 @@ class FunctionalEmployeeService(private val employeeRepository: EmployeeReposito
 
 }
 
-data class PureEmployee(val id:UUID,var name:String,var title:String,  var salary:Double) {
-
-}
+data class PureEmployee(
+    val id:UUID,
+    var name:String,
+    var title:String,
+    var salary:Double
+)
 
 interface EmployeeRepository {
     fun findById(id:UUID):PureEmployee{
