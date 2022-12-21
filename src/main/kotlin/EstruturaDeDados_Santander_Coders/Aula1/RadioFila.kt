@@ -8,7 +8,7 @@ class Radio{
     private var currentSong:String? = null
 
     fun addNewSong(song:String){
-        queue.add(song)
+        queue.offer(song)
     }
     fun play(){
         while (queue.isNotEmpty()){
@@ -24,7 +24,7 @@ class Radio{
     }
 }
 
+//Courotine, pesquisar depois
 fun main(args: Array<String>) :Unit = run{
     val radio:Radio = Radio()
-
 }
