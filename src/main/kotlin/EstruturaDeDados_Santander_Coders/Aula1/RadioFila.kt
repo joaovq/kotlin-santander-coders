@@ -1,30 +1,45 @@
 package EstruturaDeDados_Santander_Coders.Aula1
 
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import java.util.*
-import kotlin.coroutines.CoroutineContext
 
-class Radio{
-    private val queue:Queue<String> = LinkedList()
-    private var currentSong:String? = null
+class Radio {
+    private val queue: Queue<String> = LinkedList()
+    private var currentSong: String? = null
 
-    fun addNewSong(song:String){
+    fun addNewSong(song: String) {
         queue.offer(song)
     }
-    fun play(){
-        while (queue.isNotEmpty()){
-//            Pega o ultimo
-            currentSong = queue.peek()
-            println("Música: $currentSong")
+
+    suspend fun play() {
+        while(queue.isNotEmpty()) {
             currentSong = queue.poll()
+            println("Musica: " + currentSong)
+            println("Proxima musica: " + getNextSong())
+            delay(1000)
         }
     }
 
-    fun getNextSong():String{
+    fun getNextSong(): String? {
         return queue.peek()
     }
 }
 
-//Courotine, pesquisar depois
-fun main(args: Array<String>) :Unit = run{
-    val radio:Radio = Radio()
+fun main(): Unit = runBlocking {
+    val radio = Radio()
+    radio.addNewSong("Primeira musica")
+    launch {
+        radio.play()
+    }
+
+    launch {
+        radio.addNewSong("Segunda música")
+        radio.addNewSong("Terceira música")
+        radio.addNewSong("Quarta música")
+        radio.addNewSong("Quinta música")
+        delay(500)
+        radio.addNewSong("Sexta música")
+    }
 }

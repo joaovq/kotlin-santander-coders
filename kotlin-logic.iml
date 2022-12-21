@@ -36,5 +36,6 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="cloud.commandframework.kotlin.coroutines" level="project" />
   </component>
 </module>
