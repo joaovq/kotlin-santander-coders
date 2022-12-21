@@ -62,8 +62,11 @@ fun main(args: Array<String>) {
 
     linkedList2.add(2)
     linkedList2.add(4)
+    linkedList2.add(4)
+    linkedList2.add(6)
     linkedList2.show()
 
     linkedList2.remove(4)
     linkedList2.show()
+
 }
