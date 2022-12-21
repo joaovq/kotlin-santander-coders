@@ -20,7 +20,7 @@ class Radio{
     }
 
     fun getNextSong():String{
-        return queue.poll()
+        return queue.peek()
     }
 }
 
