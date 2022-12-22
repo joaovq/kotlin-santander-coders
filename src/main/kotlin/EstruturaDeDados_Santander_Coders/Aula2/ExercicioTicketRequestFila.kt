@@ -1,8 +1,7 @@
-package EstruturaDeDados_Santander_Coders.Aula1
+package EstruturaDeDados_Santander_Coders.Aula2
 
 import java.util.LinkedList
 import java.util.Queue
-import kotlin.random.Random
 
 data class TicketRequest(
     val name:String,
@@ -11,14 +10,14 @@ data class TicketRequest(
 
 class TicketManager{
     private val queue: Queue<TicketRequest> = LinkedList()
-    private var currentTicketRequest:TicketRequest? = null
+    private var currentTicketRequest: TicketRequest? = null
     /*
     * Criar uma estrutura para tratar um ticket de suporte, tratar apenas com waiting time
     * menor que 10
     *
     * */
 
-    fun addRequest(ticket:TicketRequest){
+    fun addRequest(ticket: TicketRequest){
         queue.offer(ticket)
     }
 
@@ -35,7 +34,7 @@ class TicketManager{
         }
     }
 
-    fun getNextTicket():TicketRequest{
+    fun getNextTicket(): TicketRequest {
         return queue.peek()
     }
 }

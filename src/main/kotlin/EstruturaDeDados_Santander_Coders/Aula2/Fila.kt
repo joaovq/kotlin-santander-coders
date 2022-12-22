@@ -1,4 +1,4 @@
-package EstruturaDeDados_Santander_Coders.Aula1
+package EstruturaDeDados_Santander_Coders.Aula2
 
 import java.util.LinkedList
 import java.util.Queue
