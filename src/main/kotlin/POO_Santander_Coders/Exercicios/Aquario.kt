@@ -205,6 +205,7 @@ class Aquario(
     private fun limparAquario(){
         if (aquarioEstaSujo){
             aquarioEstaSujo=false
+            println("O aquario foi limpo.")
         }
         else
             println("O aquário não está sujo, não tem necessidade de limpeza.")
