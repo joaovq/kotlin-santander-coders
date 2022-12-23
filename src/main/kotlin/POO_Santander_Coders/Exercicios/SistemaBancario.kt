@@ -4,6 +4,9 @@ import java.lang.StringBuilder
 import java.text.NumberFormat
 import java.util.*
 
+//TODO: Refazer e colocar carteiras em interfaces
+//TODO: Tirar asserted!!
+
 // my extensions functions
 fun currencyFormatter(number: Double):String{
     val currencyInstance = NumberFormat.getCurrencyInstance(Locale.forLanguageTag("pt-br"))
@@ -89,6 +92,8 @@ private abstract class Cliente(
     protected open var senha:String
     ):PessoaFisica(nome, sobrenome, cpf){
         abstract val plano: Plano
+
+//        TODO:Cliente deveria ter métodos que acessem as suas carteiras, estas deveriam estar privadas para acesso;
     }
 
 
