@@ -25,19 +25,23 @@ data class Estoque(val listaDeProdutos: MutableList<Produto> = mutableListOf()){
     init {
         println("Seja Bem vindo ao nosso controle de estoque!!")
     }
+//    TODO: Colocar opções do menu em enum
 
+
+    enum class MenuOpcoes(val value:String){
+        ADICIONAR_ITEM(value = "ADICIONAR ITEM"),
+        EDITAR_ITEM(value = "EDITAR ITEM"),
+        EXIBIR_ESTOQUE(value ="EXIBIR ITENS EM ESTOQUE "),
+        EXIBIR_TODOS(value ="EXIBIR TODOS OS ITENS "),
+        ZERAR_ESTOQUE_DE_PRODUTO(value = "ZERAR ESTOQUE DE PRODUTO"),
+        FECHAR_SISTEMA(value="FECHAR SISTEMA");
+    }
     fun exibirMenu(){
-        println("""
-        
-        1- ADICIONAR ITEM 
-        2- EDITAR ITEM 
-        3- EXIBIR ITENS EM ESTOQUE 
-        4- EXIBIR TODOS OS ITENS 
-        5- ZERAR ESTOQUE DE PRODUTO
-        6- FECHAR SISTEMA
-        
-        
-    """.trimIndent())
+        val opcoes = MenuOpcoes.values()
+
+        opcoes.forEachIndexed{index, opção->
+            println("${index+1} - ${opção.value}")
+        }
 
         escolherOpcoes()
     }
