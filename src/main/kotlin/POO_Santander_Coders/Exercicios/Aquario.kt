@@ -12,7 +12,7 @@ fun main(args: Array<String>) {
 
 class Aquario(
     val peixes:MutableList<Peixe> = mutableListOf(),
-    val parametroDeLimpeza:Int = 3,
+    var parametroDeLimpeza:Int = 3,
     private var capacidade: Capacidade = Capacidade.PEQUENO
 ) {
     var condicaoDeLimpeza:Int
@@ -49,6 +49,7 @@ class Aquario(
         GRANDE;
     }
 
+//    TODO:Colocar a cor numa enum
     data class Peixe(
         var nome:String = "",
         var cor:String = "",
