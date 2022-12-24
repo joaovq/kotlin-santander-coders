@@ -92,8 +92,8 @@ private data class ClienteNormal(
     override var sobrenome: String,
     override val cpf: String,
     override var senha: String
-):Cliente(nome, sobrenome, cpf, senha,Plano.NORMAL) {
-    inner class CarteiraClienteNormal(
+):Cliente(nome, sobrenome, cpf, senha,Plano.NORMAL), ContaFisica {
+    private inner class CarteiraClienteNormal(
         override val senha: String = ""
     ):CarteiraFisica {
         override val tipo: TipoDeCarteira = TipoDeCarteira.NORMAL
@@ -103,21 +103,21 @@ private data class ClienteNormal(
 
     private val carteiraFisica = CarteiraClienteNormal(this.senha) as CarteiraFisica
 
-    fun extrairSaldo():Double{
+    override fun extrairSaldo():Double{
         return carteiraFisica.extrairSaldo()
     }
-    fun emitirExtrato():String{
+    override fun emitirExtrato():String{
         return carteiraFisica.retirarExtrato()
     }
 
-    fun depositar(valor: Double){
+    override fun depositar(valor: Double){
         carteiraFisica.deposito(valor)
     }
 
-    fun saque(valor: Double){
+    override fun saque(valor: Double){
         carteiraFisica.saque(valor)
     }
-    fun pagarBoleto(valor: Double){
+    override fun pagarBoleto(valor: Double){
         carteiraFisica.pagueBoleto(valor)
     }
 }
@@ -126,7 +126,12 @@ private data class ClientePremium(
     override var sobrenome: String,
     override val cpf: String,
     override var senha: String,
-):Cliente(nome, sobrenome, cpf, senha, Plano.PREMIUM){
+):Cliente(nome,
+    sobrenome,
+    cpf,
+    senha,
+    Plano.PREMIUM
+), ContaDigital, ContaFisica{
     private inner class CarteiraClientePremium(
         override val senha: String = ""
     ):CarteiraDigital, CarteiraFisica {
@@ -137,30 +142,30 @@ private data class ClientePremium(
     private val carteiraDigital = CarteiraClientePremium(senha) as CarteiraDigital
     private val carteiraFisica = CarteiraClientePremium(senha) as CarteiraFisica
 
-    fun extrairSaldo():Double{
+    override fun extrairSaldo():Double{
         return carteiraFisica.extrairSaldo()
     }
-    fun emitirExtrato():String{
+    override fun emitirExtrato():String{
         return carteiraFisica.retirarExtrato()
     }
-    fun transferenciaPix(valor: Double){
+    override fun transferenciaPix(valor: Double){
         carteiraDigital.transferenciaPix(valor)
     }
-    fun guardar(valor: Double){
+    override fun guardar(valor: Double){
         carteiraDigital.guardar(valor)
     }
-    fun investir(valor: Double){
+    override fun investir(valor: Double){
         carteiraDigital.investir(valor)
     }
 
-    fun depositar(valor: Double){
+    override fun depositar(valor: Double){
         carteiraFisica.deposito(valor)
     }
-    fun pagarBoleto(valor: Double){
+    override fun pagarBoleto(valor: Double){
         carteiraDigital.pagueBoleto(valor)
     }
 
-    fun saque(valor: Double){
+    override fun saque(valor: Double){
         carteiraFisica.saque(valor)
     }
 }
@@ -170,7 +175,7 @@ private data class ClienteDigital(
     override var sobrenome: String,
     override val cpf: String,
     override var senha: String,
-):Cliente(nome, sobrenome, cpf, senha, Plano.DIGITAL){
+):Cliente(nome, sobrenome, cpf, senha, Plano.DIGITAL), ContaDigital{
     private inner class CarteiraClienteDigital(
         override val senha: String = ""
     ):CarteiraDigital {
@@ -181,27 +186,44 @@ private data class ClienteDigital(
 
     private val carteiraDigital = CarteiraClienteDigital() as CarteiraDigital
 
-
-    fun extrairSaldo():Double{
+    override fun extrairSaldo():Double{
         return carteiraDigital.extrairSaldo()
     }
-    fun emitirExtrato():String{
+    override fun emitirExtrato():String{
         return carteiraDigital.retirarExtrato()
     }
-    fun transferenciaPix(valor: Double){
+    override fun transferenciaPix(valor: Double){
         carteiraDigital.transferenciaPix(valor)
     }
-    fun pagarBoleto(valor: Double){
+    override fun pagarBoleto(valor: Double){
         carteiraDigital.pagueBoleto(valor)
     }
-    fun guardar(valor: Double){
+    override fun guardar(valor: Double){
         carteiraDigital.guardar(valor)
     }
-    fun investir(valor: Double){
+    override fun investir(valor: Double){
         carteiraDigital.investir(valor)
     }
-
 }
+// Conta, Interfaces dos métodos de Cliente
+
+interface Conta{
+    fun extrairSaldo():Double
+    fun emitirExtrato():String
+
+    fun pagarBoleto(valor: Double)
+}
+interface ContaFisica:Conta{
+    fun depositar(valor: Double)
+
+    fun saque(valor: Double)
+}
+interface ContaDigital:Conta{
+    fun guardar(valor: Double)
+    fun investir(valor: Double)
+    fun transferenciaPix(valor: Double)
+}
+
 
 // Carteiras
 interface Carteira{
@@ -264,9 +286,6 @@ interface CarteiraDigital:Carteira{
         println("O valor de ${valor.currencyFormatterBr()} foi guardado")
     }
 }
-
-
-
 //Tipo de Carteiras
 
 enum class TipoDeCarteira{
