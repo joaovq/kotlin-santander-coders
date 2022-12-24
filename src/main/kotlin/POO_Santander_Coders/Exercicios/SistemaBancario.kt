@@ -4,7 +4,7 @@ import java.lang.StringBuilder
 import java.text.NumberFormat
 import java.util.*
 
-//TODO: Refazer e colocar carteiras em interfaces
+//TODO: Avaliar o melhor caminho
 
 // my extensions functions
 fun currencyFormatter(number: Double):String{
