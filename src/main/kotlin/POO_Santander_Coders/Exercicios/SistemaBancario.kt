@@ -31,7 +31,7 @@ fun main(args: Array<String>) {
         cpf = "623839-0",
         senha = "4345564"
     )
-    with(clientePremium.carteiraDigital){
+    with(clientePremium){
         this.guardar(100.0)
         println(this.saldo)
         this.transferenciaPix(100.0)
@@ -47,7 +47,7 @@ fun main(args: Array<String>) {
         cpf = "623839-0",
         senha = "4345564"
     )
-    with(clienteDigital.carteiraDigital){
+    with(clienteDigital){
         this.guardar(100.0)
         println(this.saldo.currencyFormatterBr())
         this.transferenciaPix(100.0)
@@ -63,7 +63,7 @@ fun main(args: Array<String>) {
         senha = "17730934"
     )
 
-    with(clienteNormal.carteiraFisica){
+    with(clienteNormal){
         println("Seu saldo é: ${saldo.currencyFormatterBr()}")
         this.deposito(5000.0)
         this.saque(3000.0)
@@ -79,10 +79,10 @@ private abstract class PessoaFisica(
     open val cpf:String
 )
 
-enum class Plano(var nome: String,var  carteiraFisica: CarteiraFisica? = null,var carteiraDigital: CarteiraDigital? = null){
-    NORMAL(nome = "normal", carteiraFisica = CarteiraFisica()),
-    DIGITAL(nome = "digital", carteiraDigital = CarteiraDigital()),
-    PREMIUM(nome = "premium", carteiraFisica = CarteiraFisica(), carteiraDigital = CarteiraDigital());
+enum class Plano(var nome: String){
+    NORMAL(nome = "normal"),
+    DIGITAL(nome = "digital"),
+    PREMIUM(nome = "premium");
 }
 
 private abstract class Cliente(
@@ -101,23 +101,29 @@ private data class ClienteNormal(
     override var nome: String,
     override var sobrenome: String,
     override val cpf: String,
-    override var senha: String
-):Cliente(nome, sobrenome, cpf, senha){
-
+    override var senha: String,
+    override var tipo: String = "",
+    override var saldo: Double = 0.0,
+    override var extrato: String = """
+        ============EXTRATO============
+    """.trimIndent()
+):Cliente(nome, sobrenome, cpf, senha),CarteiraFisica {
     override val plano = Plano.NORMAL
-    val carteiraFisica = plano.carteiraFisica!!
 }
 private data class ClientePremium(
     override var nome: String,
     override var sobrenome: String,
     override val cpf: String,
-    override var senha: String
-):Cliente(nome, sobrenome, cpf, senha) {
+    override var senha: String,
+    override var tipo: String  = "",
+    override var saldo: Double = 0.0,
+    override var extrato: String = """
+        ============EXTRATO============
+    """.trimIndent()
+):Cliente(nome, sobrenome, cpf, senha), CarteiraFisica, CarteiraDigital{
 
     override val plano: Plano = Plano.PREMIUM
 
-    val carteiraFisica = plano.carteiraFisica!!
-    val carteiraDigital =plano.carteiraDigital!!
 
 }
 
@@ -125,37 +131,32 @@ private data class ClienteDigital(
     override var nome: String,
     override var sobrenome: String,
     override val cpf: String,
-    override var senha: String
-):Cliente(nome, sobrenome, cpf, senha){
-
+    override var senha: String,
+    override var tipo: String  = "",
+    override var saldo: Double = 0.0,
+    override var extrato: String = """
+        ============EXTRATO============
+    """.trimIndent()
+):Cliente(nome, sobrenome, cpf, senha), CarteiraDigital{
     override val plano = Plano.DIGITAL
-        get() = field
 
-    val carteiraDigital: CarteiraDigital = plano.carteiraDigital!!
 
 }
 
 interface Carteira{
      val senha: String
      val tipo:String
-     val saldo:Double
+     var saldo:Double
      var extrato:String
 
-     fun pagueBoleto(valor: Double){
+      fun pagueBoleto(valor: Double){
          extrato = extrato.concat("Pagamento de boleto efetuado de valor ${valor.currencyFormatterBr()}")
          println("Pagamento de boleto efetuado de valor ${valor.currencyFormatterBr()}")
      }
 }
 
-open class CarteiraFisica() :Carteira{
+interface CarteiraFisica :Carteira{
 
-
-    override var senha: String = ""
-    override var tipo: String  = ""
-    override var saldo: Double = 0.0
-    override var extrato: String = """
-        ============EXTRATO============
-    """.trimIndent()
     fun saque(valor: Double){
         if (saldo.minus(valor)>0.0){
             saldo=saldo.minus(valor)
@@ -172,21 +173,15 @@ open class CarteiraFisica() :Carteira{
         println("Deposito de ${valor.currencyFormatterBr()} foi efetuado")
     }
 }
-open class CarteiraDigital:Carteira{
+interface CarteiraDigital:Carteira{
 
-    override var senha: String = ""
-    override var tipo: String = ""
-    override var saldo: Double = 0.0
-    override var extrato: String = """
-        ============EXTRATO============
-    """.trimIndent()
 
-    open fun transferenciaPix(valor: Double){
+    fun transferenciaPix(valor: Double){
         saldo-=valor
         extrato = extrato.concat("Transferencia de pix realizada, valor: ${valor.currencyFormatterBr()}")
         println("Transferencia de pix realizada, valor: ${valor.currencyFormatterBr()}")
     }
-    open fun investir(valor:Double){
+    fun investir(valor:Double){
         if (saldo.minus(valor)>0.0){
             this.saldo=saldo.minus(valor)
             saldo=0.0
@@ -199,7 +194,7 @@ open class CarteiraDigital:Carteira{
 
 
     }
-    open fun guardar(valor: Double){
+    fun guardar(valor: Double){
         saldo = saldo.plus(valor)
         extrato = extrato.concat("O valor de ${valor.currencyFormatterBr()} foi guardado")
         println("O valor de ${valor.currencyFormatterBr()} foi guardado")
