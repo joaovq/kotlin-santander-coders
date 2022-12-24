@@ -11,18 +11,18 @@ fun currencyFormatter(number: Double):String{
     val currencyInstance = NumberFormat.getCurrencyInstance(Locale.forLanguageTag("pt-br"))
     return currencyInstance.format(number)
 }
-
 fun Double.currencyFormatterBr():String{
     return currencyFormatter(this)
 }
-
 fun String.concat(appendable: String):String{
     val stringBuilder = StringBuilder(this)
     stringBuilder.append("\n$appendable")
     return stringBuilder.toString()
 }
 
+//end myextension functions
 
+//testes
 fun main(args: Array<String>) {
     val clientePremium = ClientePremium(
         nome = "Joao",
@@ -78,6 +78,7 @@ enum class Plano(var nome: String){
     PREMIUM(nome = "premium");
 }
 
+//Cliente e os diferemtes planos do Sistema Bancário
 private abstract class Cliente(
     open var nome: String,
     open var sobrenome: String,
@@ -85,8 +86,6 @@ private abstract class Cliente(
     protected open var senha:String,
     val plano: Plano
     )
-
-
 private data class ClienteNormal(
     override var nome: String,
     override var sobrenome: String,
@@ -126,12 +125,7 @@ private data class ClientePremium(
     override var sobrenome: String,
     override val cpf: String,
     override var senha: String,
-):Cliente(nome,
-    sobrenome,
-    cpf,
-    senha,
-    Plano.PREMIUM
-), ContaDigital, ContaFisica{
+):Cliente(nome, sobrenome, cpf, senha, Plano.PREMIUM), ContaDigital, ContaFisica{
     private inner class CarteiraClientePremium(
         override val senha: String = ""
     ):CarteiraDigital, CarteiraFisica {
@@ -169,7 +163,6 @@ private data class ClientePremium(
         carteiraFisica.saque(valor)
     }
 }
-
 private data class ClienteDigital(
     override var nome: String,
     override var sobrenome: String,
@@ -205,8 +198,8 @@ private data class ClienteDigital(
         carteiraDigital.investir(valor)
     }
 }
-// Conta, Interfaces dos métodos de Cliente
 
+// Conta, Interfaces dos métodos de Cliente
 interface Conta{
     fun extrairSaldo():Double
     fun emitirExtrato():String
@@ -286,8 +279,8 @@ interface CarteiraDigital:Carteira{
         println("O valor de ${valor.currencyFormatterBr()} foi guardado")
     }
 }
-//Tipo de Carteiras
 
+//Tipo de Carteiras Enum
 enum class TipoDeCarteira{
     PREMIUM,
     DIGITAL,
