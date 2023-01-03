@@ -1,7 +1,7 @@
 package POO_Santander_Coders.Exercicios.SAMFunctionals
 
 
-
+//typealias só aceita tipos
 typealias IntPredicate2 = (i: Int) -> Boolean
 
 val isEven2: IntPredicate2 = { it % 2 == 0 }
