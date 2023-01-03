@@ -10,10 +10,13 @@ fun main(args: Array<String>) {
         when(val resposta=aquario.alimentarPeixes()){
             is Aquario.Alimento.Falha -> println("${resposta.mensagem} em alimentar peixes")
             is Aquario.Alimento.Parcial -> println("${resposta.mensagem} em alimentar peixes")
-            is Aquario.Alimento.Sucesso -> println("${resposta.mensagem} em alimentar peixes")
+            is StatusSucesso -> println("${resposta.mensagem} em alimentar peixes")
         }
     }
 }
+//Um nome alteranivo para evitar nomes grandes
+//typealias so aceita tipo. Para constantes que não sejam tipos, utiliza-se const val
+typealias StatusSucesso= Aquario.Alimento.Sucesso
 
 class Aquario(){
 
