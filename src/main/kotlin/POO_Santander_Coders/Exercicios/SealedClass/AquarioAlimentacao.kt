@@ -31,7 +31,7 @@ class Aquario(){
         class Falha(val mensagem :String= "Falha" ) :Alimento(numPeixes = 0)
     }
 
-    fun alimentarPeixes():Aquario.Alimento{
+    fun alimentarPeixes():Alimento{
         return when(Random.nextInt(0..2)){
             0-> Alimento.Sucesso()
             1-> Alimento.Parcial()
