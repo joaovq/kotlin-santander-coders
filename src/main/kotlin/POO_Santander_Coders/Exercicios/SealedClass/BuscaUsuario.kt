@@ -1,6 +1,6 @@
 package POO_Santander_Coders.Exercicios.SealedClass
 
-import POO_Santander_Coders.Exercicios.SealedClass.ResultadoBuscaUsuario.Carregando.tipo
+import POO_Santander_Coders.Exercicios.SealedClass.ResultadoBuscaUsuario.Carregando.buscaUsuario
 import kotlin.random.Random
 
 data class Usuario(var name:String, var senha:String)
@@ -38,7 +38,7 @@ abstract class Pessoa(nome:String, cpf:String){
     inner class PessoaJuridica(){}
 
 }
-
+}
 fun main(args: Array<String>) {
 //    Não podemos instanciar uma sealed class. é abstrata
 //    Sealed types cannot be instantiated
@@ -48,20 +48,19 @@ fun main(args: Array<String>) {
 //    Pessoa("Joao", cpf = "17921")
 
 //    Nested class podemos instanciar fora da classe sem ter uma instancia da classe externa
-    Pessoa.PessoaFisica()
+    ResultadoBuscaUsuario.Pessoa.PessoaFisica()
 
 //    Para inner class Não podemos instanciar sem uma instancia da classe pessoa, se não for dentro da classe externa
 //    Pessoa.PessoaJuridica()
 
     repeat(6) {
         when(val resposta = buscaUsuario()) {
-            is Sucesso -> println("${resposta.mensagem} O usuário buscado foi ${resposta.usuarioBuscado}.")
-            is Carregando -> {
+            is ResultadoBuscaUsuario.Sucesso -> println("${resposta.mensagem} O usuário buscado foi ${resposta.usuarioBuscado}.")
+            is ResultadoBuscaUsuario.Carregando -> {
                 println("Carregando...")
                 resposta.update()
             }
-            is Falha -> println(resposta.erro)
+            is ResultadoBuscaUsuario.Falha -> println(resposta.erro)
         }
     }
-}
 }
