@@ -8,8 +8,8 @@ fun main(args: Array<String>) {
 
     repeat(6){
         when(val resposta=aquario.alimentarPeixes()){
-            is Aquario.Alimento.Falha -> println("${resposta.mensagem} em alimentar peixes")
-            is Aquario.Alimento.Parcial -> println("${resposta.mensagem} em alimentar peixes")
+            is StatusFalha -> println("${resposta.mensagem} em alimentar peixes")
+            is StatusParcial -> println("${resposta.mensagem} em alimentar peixes")
             is StatusSucesso -> println("${resposta.mensagem} em alimentar peixes")
         }
     }
@@ -17,6 +17,8 @@ fun main(args: Array<String>) {
 //Um nome alteranivo para evitar nomes grandes
 //typealias so aceita tipo. Para constantes que não sejam tipos, utiliza-se const val
 typealias StatusSucesso= Aquario.Alimento.Sucesso
+typealias StatusParcial= Aquario.Alimento.Parcial
+typealias StatusFalha= Aquario.Alimento.Falha
 
 class Aquario(){
 
