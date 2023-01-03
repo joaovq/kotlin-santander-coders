@@ -8,7 +8,7 @@ fun interface IntPredicate {
 
 //    fun isOdd():Boolean
 }
-////Utilizando mais de um método precisamos declarar mais de um objeto e implementar as funcoes
+//Utilizando mais de um método precisamos declarar mais de um objeto e implementar as funcoes
 //val isEven = object :IntPredicate{
 //    override fun accept(i: Int): Boolean {
 //        TODO("Not yet implemented")
@@ -30,6 +30,6 @@ fun interface ConnectionDb{
     fun connect()
 }
 
-val connectionDb = ConnectionDb { DriverManager.getConnection("") }
+val connectionDb = ConnectionDb { DriverManager.getConnection("jdbc:mysql//localhost:3306/") }
 
 
