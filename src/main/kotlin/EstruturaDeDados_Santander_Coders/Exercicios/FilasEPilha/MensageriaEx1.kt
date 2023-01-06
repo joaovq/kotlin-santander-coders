@@ -16,25 +16,22 @@ import kotlin.random.Random
 *
 * */
 data class Message(
-    val text: String,
-    val recipient: String
+    val text: String, val recipient: String
 )
 
 class MessageBroker {
     private val messageSender = Random(1000)
     val queue: Queue<Message> = LinkedList()
-    fun processFirstMessage() {
-        /*
+    fun processFirstMessage() {/*
         * Implementar maneira de processar a fila e de retentar o envio de uma mensagem que deu erro
         */
         //send(message)
 //        Pega o ultimo mas não remove
         val lastMessageInQueue = queue.peek()
         val send = send(lastMessageInQueue)
-        if (send){
+        if (send) {
             queue.poll()
-        }
-        else{
+        } else {
 //            Remove o último e pega
             val messageRemoved = queue.poll()
             queue.add(lastMessageInQueue)
