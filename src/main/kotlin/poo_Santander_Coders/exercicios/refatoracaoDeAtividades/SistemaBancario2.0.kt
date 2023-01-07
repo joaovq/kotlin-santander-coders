@@ -4,31 +4,23 @@ import java.lang.StringBuilder
 import java.text.NumberFormat
 import java.util.*
 
-//TODO: Avaliar o melhor caminho
 
-// my extensions functions
+fun main(args: Array<String>) {
+
+}
+
 fun currencyFormatter(number: Double): String {
     val currencyInstance = NumberFormat.getCurrencyInstance(Locale.forLanguageTag("pt-br"))
     return currencyInstance.format(number)
 }
-
 fun Double.currencyFormatterBr(): String {
     return currencyFormatter(this)
 }
-
 fun String.concat(appendable: String): String {
     val stringBuilder = StringBuilder(this)
     stringBuilder.append("\n$appendable")
     return stringBuilder.toString()
 }
-
-//end myextension functions
-
-//START TESTS
-fun main(args: Array<String>) {
-
-}
-//END TESTS
 
 //Não preciso passar os parametros de cliente para os filhos, obrigatoriamente
 abstract class Cliente(
@@ -153,8 +145,6 @@ data class ClientePremium(
     }
 }
 
-//INTERFACES CONTA
-//Metodos que vai ser implementados em cliente, para recuperar as ações em Carteira
 //TODO: VER SE SERIA MELHOR USAR TRANSACAO AO INVES DE CONTA
 
 interface Conta {
@@ -173,7 +163,7 @@ interface ContaDigital : Conta {
 }
 
 //ENUM CLASSES
-//TODO: Passar a carteira
+//TODO: Passar a carteira como parametro
 enum class Plano(plano: String) {
     NORMAL("normal"), DIGITAL("digital"), PREMIUM("premium");
 }
@@ -182,7 +172,6 @@ enum class Tipo(tipo: String) {
     FISICA("física"), DIGITAL("digital");
 }
 
-//CARTEIRAS
 abstract class Carteira(
     senha: String
 ) {
