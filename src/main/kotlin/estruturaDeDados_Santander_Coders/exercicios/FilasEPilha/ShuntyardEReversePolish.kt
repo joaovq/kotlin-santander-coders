@@ -53,7 +53,7 @@ class ShuntYard {
             }
 
 //      TODO:TESTES  3+4x2/(1−5)^2^3
-
+//      TODO: fazer o isOperatorO1 funcionar
             when{
                 containsNum ->{
                     outputQueue.offer(token.substring(i, i+1))
