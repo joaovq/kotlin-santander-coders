@@ -1,6 +1,7 @@
 package estruturaDeDados_Santander_Coders.exercicios.FilasEPilha
 
 import poo_Santander_Coders.exercicios.concat
+import java.lang.StringBuilder
 import java.util.LinkedList
 import java.util.Queue
 import java.util.Stack
@@ -40,13 +41,10 @@ class ShuntYard {
             val containsOperator = token.substring(i, i+1).contains(regex = Regex("^[+-x/^]$"))
             val containsLeftParenthesis = token.substring(i, i+1).contains(regex = Regex("^[(]$"))
             val containsRightParenthesis = token.substring(i, i+1).contains(regex = Regex("^[)]$"))
-            val isOperatorO1:Boolean = if (outputQueue.isNotEmpty()){
-                ((outputQueue.peek() != "(") &&
-                        (isPrecedence(token.substring(i,i+1), outputQueue.peek()) ||
-                                (isPrecedence(token.substring(i,i+1), outputQueue.peek()))))
-            }
-            else if (operatorStack.size<2){
-                false
+            val isOperatorO1:Boolean = if (operatorStack.isNotEmpty()){
+                ((operatorStack.peek() != "(") &&
+                        (isPrecedence(token.substring(i,i+1), operatorStack.peek()) ||
+                                (isPrecedence(token.substring(i,i+1), operatorStack.peek()))))
             }
             else{
                 false
@@ -64,23 +62,25 @@ class ShuntYard {
                 containsRightParenthesis->{
                     operatorStack.remove("(")
                 }
-                containsOperator->{
-                    operatorStack.push(token.substring(i, i+1))
-                }
                 isOperatorO1->{
                     val operatorO1 = operatorStack.pop()
                     operatorStack.push(token.substring(i,i+1))
                     outputQueue.offer(operatorO1)
+                }
+                containsOperator->{
+                    operatorStack.push(token.substring(i, i+1))
                 }
             }
         }
 
 
         val output = outputQueue.joinToString(separator = " ")
-        val operatorOutput = operatorStack.joinToString(separator = " ")
+        val operatorOutput = operatorStack.joinToString(separator = " ").reversed()
 
         println(output)
         println(operatorOutput)
+        val append = StringBuilder(output).append(" $operatorOutput")
+        println("Output: $append")
 
 
     }
@@ -92,12 +92,11 @@ class ShuntYard {
             newOperator == "^"->{
                 false
             }
-            newOperator == "+" && (stackOperator == "x" ||
-                                    stackOperator == "/" ||
-                                        stackOperator == "^")->{
+            newOperator == "+"->{
                 false
             }
             newOperator == "x" && (
+                   stackOperator=="+" ||
                 stackOperator == "^")->{
                 false
             }
