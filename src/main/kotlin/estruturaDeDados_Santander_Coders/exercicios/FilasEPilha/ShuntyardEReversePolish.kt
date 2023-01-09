@@ -49,14 +49,17 @@ class ShuntYard {
                 false
             }
 
-//      TODO:TESTES  3+4x2/(1−5)^2^3
-//      TODO: Resolver o sumiço do  operador "-"
+//      TODO:TESTES  3+4x2/(1-5)^2^3
             when{
                 containsNum ->{
                     outputQueue.offer(token.substring(i, i+1))
                 }
                 containsRightParenthesis->{
-                    operatorStack.remove("(")
+                   while (operatorStack.peek() != "("){
+                       val operatorO1 = operatorStack.pop()
+                       outputQueue.offer(operatorO1)
+                   }
+                    operatorStack.pop()
                 }
                 containsLeftParenthesis->{
                     operatorStack.push("(")
