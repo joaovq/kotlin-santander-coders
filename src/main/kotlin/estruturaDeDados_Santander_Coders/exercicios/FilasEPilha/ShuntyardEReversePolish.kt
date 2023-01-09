@@ -38,29 +38,28 @@ class ShuntYard {
     private fun convertNotation(token: String) {
         for (i in token.indices ){
             val containsNum = token.substring(i, i+1).contains(regex = Regex("^[0-9]$"))
-            val containsOperator = token.substring(i, i+1).contains(regex = Regex("^[+-x/^]$"))
+            val containsOperator = token.substring(i, i+1).contains(regex = Regex("[-+x/^]"))
             val containsLeftParenthesis = token.substring(i, i+1).contains(regex = Regex("^[(]$"))
             val containsRightParenthesis = token.substring(i, i+1).contains(regex = Regex("^[)]$"))
             val isOperatorO1:Boolean = if (operatorStack.isNotEmpty()){
                 ((operatorStack.peek() != "(") &&
-                        (isPrecedence(token.substring(i,i+1), operatorStack.peek()) ||
-                                (isPrecedence(token.substring(i,i+1), operatorStack.peek()))))
+                        (isPrecedence(token.substring(i,i+1), operatorStack.peek()) ))
             }
             else{
                 false
             }
 
 //      TODO:TESTES  3+4x2/(1−5)^2^3
-//      TODO: fazer o isOperatorO1 funcionar
+//      TODO: Resolver o sumiço do  operador "-"
             when{
                 containsNum ->{
                     outputQueue.offer(token.substring(i, i+1))
                 }
-                containsLeftParenthesis->{
-                    operatorStack.push("(")
-                }
                 containsRightParenthesis->{
                     operatorStack.remove("(")
+                }
+                containsLeftParenthesis->{
+                    operatorStack.push("(")
                 }
                 isOperatorO1->{
                     val operatorO1 = operatorStack.pop()
@@ -86,21 +85,25 @@ class ShuntYard {
     }
 
     private fun isPrecedence(newOperator:String, stackOperator:String):Boolean = when{
-            newOperator == stackOperator->{
+        newOperator == stackOperator->{
                  false
             }
-            newOperator == "^"->{
+        newOperator == "^"->{
                 false
             }
-            newOperator == "+"->{
+        newOperator == "+"->{
                 false
             }
-            newOperator == "x" && (
+        newOperator == "-"->{
+                false
+            }
+        newOperator == "x" && (
                    stackOperator=="+" ||
                 stackOperator == "^")->{
                 false
             }
-            newOperator == "/" && (
+        newOperator == "/" && (
+                    stackOperator=="+" ||
                         stackOperator == "^")->{
                 false
             }
