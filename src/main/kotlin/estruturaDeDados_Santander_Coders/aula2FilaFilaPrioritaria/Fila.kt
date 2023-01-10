@@ -1,4 +1,4 @@
-package estruturaDeDados_Santander_Coders.aula2
+package estruturaDeDados_Santander_Coders.aula2FilaFilaPrioritaria
 
 import java.util.LinkedList
 import java.util.Queue

@@ -1,4 +1,4 @@
-package estruturaDeDados_Santander_Coders.aula1
+package estruturaDeDados_Santander_Coders.aula1ListaListaLigada
 
 // Listas ligadas guardam o endereço de memória do próximo item e o valor
 
