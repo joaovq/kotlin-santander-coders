@@ -1,6 +1,9 @@
-package estruturaDeDados_Santander_Coders.aula5
+package estruturaDeDados_Santander_Coders.aula5eaula6
 
-data class Node2<T>(val value:T, var left:Node2<T>? = null, var right:Node2<T>?=null){
+import kotlin.math.abs
+import kotlin.math.max
+
+data class Node2<T>(val value:T, var left:Node2<T>? = null, var right:Node2<T>?=null, var height:Int = 0){
     fun isLeaf(): Boolean {
         return left == null && right == null
     }
@@ -35,9 +38,47 @@ data class Node2<T>(val value:T, var left:Node2<T>? = null, var right:Node2<T>?=
     }
 }
 
-class Tree2<T:Comparable<T>>(){
+class Tree2<T:Comparable<T>> {
     private var root: Node2<T>? = null
 
+
+    fun isBalanced(node: Node2<T>? = root):Int{
+        if (node == null) return 0
+
+        val leftHeight  = isBalanced(node.left)
+
+        if (leftHeight < 0) return -1
+
+        val rightHeight = isBalanced(node.right)
+
+        if (rightHeight < 0) return -1
+
+        return if (abs(leftHeight-rightHeight) <=1){
+    //            Está balanceado
+            max(leftHeight, rightHeight)+1
+        } else{
+            -1
+        }
+    }
+
+    fun rotateLeft(node:Node2<T>): Node2<T>?{
+        val right = node.right
+        val leftRightNode = right?.left
+
+        right?.left = node
+        node.right = leftRightNode
+        return right
+    }
+    fun rotateRight(node: Node2<T>):Node2<T>?{
+        val leftNode = node.left
+        val rightLeftNode = leftNode?.right
+
+
+        leftNode?.right = node
+        node.left = rightLeftNode
+
+        return leftNode
+    }
     fun add(value:T){
         if (root == null){
             root = Node2(value)
@@ -46,8 +87,24 @@ class Tree2<T:Comparable<T>>(){
         }
     }
 
-    private fun add(node: Node2<T>, value: T) {
-        if (node.value >= value) {
+    private fun add(node: Node2<T>?, value: T):Node2<T> {
+        if (node == null) return Node2(value)
+
+//Para a arvore AVL
+        if (node.value> value){
+//            Inserir a esquerda
+            node.left = add(node.left, value)
+        }else if (node.value< value){
+            node.right = add(node.right, value)
+        }
+        else{
+            return node
+        }
+
+//        val balance: Int = (node.left?.height() - node.right.height())
+
+        return node
+       /* if (node.value >= value) {
             if (node.left == null) {
                 println("add esquerda ${node.value}")
                 node.left = Node2(value)
@@ -63,7 +120,7 @@ class Tree2<T:Comparable<T>>(){
                 println("direita")
                 add(node.right!!, value)
             }
-        }
+        }*/
     }
 //      O(log n)
 //    Precisa de menos tempo para procurar e salvar os dados
@@ -88,6 +145,8 @@ class Tree2<T:Comparable<T>>(){
         }while (next !=null)
         return false
     }
+
+
 
     fun remove(value: T){
         if (root == null) return
@@ -129,20 +188,19 @@ class Tree2<T:Comparable<T>>(){
         return node.value.toString() + " " + toString(node.left) + " " + toString(node.right)
     }
 
-
-
-
 }
+
+
+fun <T> Node2<T>.height() = this.height
 
 fun main(args: Array<String>) {
     val tree2 = Tree2<Int>()
+    tree2.add(8)
+    println(tree2.isBalanced())
     tree2.add(5)
-    tree2.add(2)
-    tree2.add(5)
-    tree2.add(3)
+    println(tree2.isBalanced())
     tree2.add(4)
-    tree2.add(5)
-    println(tree2)
+    println(tree2.isBalanced())
 
     val search = tree2.search(3)
 

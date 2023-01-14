@@ -1,4 +1,4 @@
-package estruturaDeDados_Santander_Coders.aula5
+package estruturaDeDados_Santander_Coders.aula5eaula6
 
 data class Node<T>(var value:T)
 class Tree<T :Comparable<T>>{
