@@ -1,10 +1,9 @@
-package estruturaDeDados_Santander_Coders.projeto
+package estruturaDeDados_Santander_Coders.projeto.libraryOpenCSV
 
 import com.opencsv.bean.CsvToBeanBuilder
 import java.io.Reader
 import java.nio.file.Files
 import java.nio.file.Paths
-import java.time.LocalDateTime
 
 fun main(args: Array<String>) {
     val reader:Reader = Files.newBufferedReader(Paths.get("utils/operacoes.csv"))
@@ -14,7 +13,6 @@ fun main(args: Array<String>) {
         print("${it}")
         println()
     }
-    val newBufferedWriter = Files.newBufferedWriter(Paths.get("utils/finish.csv"))
 }
 
 class Deal{
@@ -28,6 +26,6 @@ class Deal{
     var valor: Double= 0.0
 
     override fun toString(): String {
-        return "Transaction(agencia=$agencia, conta=$conta, banco='$banco', titular='$titular', operacao='$operacao', dataHora='$dataHora', valor=$valor)"
+        return "Deal(agencia=$agencia, conta=$conta, banco='$banco', titular='$titular', operacao='$operacao', dataHora='$dataHora', valor=$valor)"
     }
 }

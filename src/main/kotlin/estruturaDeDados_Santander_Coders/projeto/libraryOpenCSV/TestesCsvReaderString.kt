@@ -1,6 +1,7 @@
-package estruturaDeDados_Santander_Coders.projeto
+package estruturaDeDados_Santander_Coders.projeto.libraryOpenCSV
 
 import com.opencsv.CSVReaderBuilder
+import estruturaDeDados_Santander_Coders.projeto.TestDeals
 import java.io.Reader
 import java.nio.file.Files
 import java.nio.file.Paths
