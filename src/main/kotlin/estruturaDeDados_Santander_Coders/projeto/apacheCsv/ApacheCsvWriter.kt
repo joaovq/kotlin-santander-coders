@@ -4,8 +4,6 @@ import org.apache.commons.csv.CSVFormat
 import java.io.File
 import java.io.Writer
 import java.nio.charset.Charset
-import java.nio.file.Files
-import java.nio.file.Paths
 
 fun main(args: Array<String>) {
     val writable = File("utils/deals.csv")
