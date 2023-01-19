@@ -33,36 +33,7 @@ object TestDeals {
 
         println(LocalDateTime.now())
     }
-    fun getBalanceForHolder(deal: MutableSet<Deal>):Set<Customer> {
-        return getBalance(deal)
-    }
 
-    private fun getBalance(deal: MutableSet<Deal>): Set<Customer> {
-        val customers = deal.map {
-            it.customer
-        }.toSet()
-        getBalanceAtCustomer(customers, deal)
-        return customers
-    }
-
-    private fun getBalanceAtCustomer(
-        customers: Set<Customer>,
-        deal: MutableSet<Deal>
-    ) {
-        customers.forEach { customers ->
-            val filter = deal.filter {
-                it.customer == customers
-            }
-            filter.forEach {
-                if (it.operation == Operations.DEPOSITO) {
-                    customers.deposit(it.amount, it.dateTime)
-                }
-                if (it.operation == Operations.SAQUE) {
-                    customers.withdraw(it.amount, it.dateTime)
-                }
-            }
-        }
-    }
 }
 
 fun main(args: Array<String>) {

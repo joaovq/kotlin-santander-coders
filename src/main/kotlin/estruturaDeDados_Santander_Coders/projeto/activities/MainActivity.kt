@@ -3,6 +3,7 @@ package estruturaDeDados_Santander_Coders.projeto.activities
 import estruturaDeDados_Santander_Coders.projeto.TestDeals
 import estruturaDeDados_Santander_Coders.projeto.apacheCsv.writeCsv
 import estruturaDeDados_Santander_Coders.projeto.apacheCsv.writeCustomerCsv
+import estruturaDeDados_Santander_Coders.projeto.enums.Operations
 import estruturaDeDados_Santander_Coders.projeto.model.Customer
 import estruturaDeDados_Santander_Coders.projeto.model.Deal
 import kotlinx.coroutines.delay
@@ -17,7 +18,7 @@ class MainActivity {
             
         """.trimIndent())
         deals = TestDeals.getDeals()
-        customer = TestDeals.getBalanceForHolder(deals)
+        customer = getBalanceForHolder(deals)
         onStart()
     }
 
@@ -69,6 +70,37 @@ class MainActivity {
             Fim da atividade do sistema
             
         """.trimIndent())
+    }
+}
+
+fun getBalanceForHolder(deal: MutableSet<Deal>):Set<Customer> {
+    return getBalance(deal)
+}
+
+private fun getBalance(deal: MutableSet<Deal>): Set<Customer> {
+    val customers = deal.map {
+        it.customer
+    }.toSet()
+    getBalanceAtCustomer(customers, deal)
+    return customers
+}
+
+private fun getBalanceAtCustomer(
+    customers: Set<Customer>,
+    deal: MutableSet<Deal>
+) {
+    customers.forEach { customers ->
+        val filter = deal.filter {
+            it.customer == customers
+        }
+        filter.forEach {
+            if (it.operation == Operations.DEPOSITO) {
+                customers.deposit(it.amount, it.dateTime)
+            }
+            if (it.operation == Operations.SAQUE) {
+                customers.withdraw(it.amount, it.dateTime)
+            }
+        }
     }
 }
 
