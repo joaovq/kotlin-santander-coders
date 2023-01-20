@@ -1,6 +1,6 @@
-package estruturaDeDados_Santander_Coders.projeto.model
+package estruturaDeDados_Santander_Coders.projetoTeste.model
 
-import estruturaDeDados_Santander_Coders.projeto.enums.Operations
+import estruturaDeDados_Santander_Coders.projetoTeste.enums.Operations
 import java.time.LocalDateTime
 
 data class Customer(
@@ -10,7 +10,7 @@ data class Customer(
     val holder:String,
     var balance:Double = 0.0
 ){
-    fun withdraw(value:Double, date:LocalDateTime = LocalDateTime.now()):Deal? = if (value>0){
+    fun withdraw(value:Double, date:LocalDateTime = LocalDateTime.now()): Deal? = if (value>0){
         balance-=value
         Deal(
             this, Operations.SAQUE,date, value
@@ -18,7 +18,7 @@ data class Customer(
     }else{
         null
     }
-    fun deposit(value:Double, date:LocalDateTime = LocalDateTime.now()):Deal? = if (value>0){
+    fun deposit(value:Double, date:LocalDateTime = LocalDateTime.now()): Deal? = if (value>0){
         balance+=value
         Deal(
             this, Operations.DEPOSITO,date, value

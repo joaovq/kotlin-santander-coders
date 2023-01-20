@@ -1,6 +1,6 @@
-package estruturaDeDados_Santander_Coders.projeto.model
+package estruturaDeDados_Santander_Coders.projetoTeste.model
 
-import estruturaDeDados_Santander_Coders.projeto.enums.Operations
+import estruturaDeDados_Santander_Coders.projetoTeste.enums.Operations
 import java.time.LocalDateTime
 
 data class Deal(

@@ -1,4 +1,4 @@
-package estruturaDeDados_Santander_Coders.projeto.enums
+package estruturaDeDados_Santander_Coders.projetoTeste.enums
 
 enum class Operations(val tipo:String, val icon:String) {
     SAQUE("SAQUE","⬆️"),

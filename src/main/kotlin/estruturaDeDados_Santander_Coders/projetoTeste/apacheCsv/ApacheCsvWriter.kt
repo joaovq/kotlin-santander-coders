@@ -1,7 +1,7 @@
-package estruturaDeDados_Santander_Coders.projeto.apacheCsv
+package estruturaDeDados_Santander_Coders.projetoTeste.apacheCsv
 
-import estruturaDeDados_Santander_Coders.projeto.model.Customer
-import estruturaDeDados_Santander_Coders.projeto.model.Deal
+import estruturaDeDados_Santander_Coders.projetoTeste.model.Customer
+import estruturaDeDados_Santander_Coders.projetoTeste.model.Deal
 import org.apache.commons.csv.CSVFormat
 import java.io.Writer
 

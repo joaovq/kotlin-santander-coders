@@ -1,10 +1,10 @@
-package estruturaDeDados_Santander_Coders.projeto
+package estruturaDeDados_Santander_Coders.projetoTeste
 
-import estruturaDeDados_Santander_Coders.projeto.apacheCsv.ApacheCsvReader
-import estruturaDeDados_Santander_Coders.projeto.apacheCsv.writeCsv
-import estruturaDeDados_Santander_Coders.projeto.enums.Operations
-import estruturaDeDados_Santander_Coders.projeto.model.Customer
-import estruturaDeDados_Santander_Coders.projeto.model.Deal
+import estruturaDeDados_Santander_Coders.projetoTeste.apacheCsv.ApacheCsvReader
+import estruturaDeDados_Santander_Coders.projetoTeste.apacheCsv.writeCsv
+import estruturaDeDados_Santander_Coders.projetoTeste.enums.Operations
+import estruturaDeDados_Santander_Coders.projetoTeste.model.Customer
+import estruturaDeDados_Santander_Coders.projetoTeste.model.Deal
 import java.io.Reader
 import java.io.Writer
 import java.nio.file.Files

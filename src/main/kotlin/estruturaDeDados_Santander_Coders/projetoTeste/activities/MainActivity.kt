@@ -1,12 +1,11 @@
-package estruturaDeDados_Santander_Coders.projeto.activities
+package estruturaDeDados_Santander_Coders.projetoTeste.activities
 
-import estruturaDeDados_Santander_Coders.projeto.TestDeals
-import estruturaDeDados_Santander_Coders.projeto.apacheCsv.writeCsv
-import estruturaDeDados_Santander_Coders.projeto.apacheCsv.writeCustomerCsv
-import estruturaDeDados_Santander_Coders.projeto.enums.Operations
-import estruturaDeDados_Santander_Coders.projeto.model.Customer
-import estruturaDeDados_Santander_Coders.projeto.model.Deal
-import kotlinx.coroutines.delay
+import estruturaDeDados_Santander_Coders.projetoTeste.TestDeals
+import estruturaDeDados_Santander_Coders.projetoTeste.apacheCsv.writeCsv
+import estruturaDeDados_Santander_Coders.projetoTeste.apacheCsv.writeCustomerCsv
+import estruturaDeDados_Santander_Coders.projetoTeste.enums.Operations
+import estruturaDeDados_Santander_Coders.projetoTeste.model.Customer
+import estruturaDeDados_Santander_Coders.projetoTeste.model.Deal
 
 class MainActivity {
     private lateinit var deals:MutableSet<Deal>

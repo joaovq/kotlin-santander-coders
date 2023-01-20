@@ -1,4 +1,4 @@
-package estruturaDeDados_Santander_Coders.projeto.model
+package estruturaDeDados_Santander_Coders.projetoTeste.model
 
 data class Bank(
     val name:String,
