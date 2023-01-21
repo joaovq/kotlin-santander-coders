@@ -10,7 +10,7 @@ import java.util.*
 
 
 class ApacheCsvReader(){
-    fun filterCSV(reader:Reader)= TreeSet<Deal>(readCSV(reader))
+    fun filterCSV(reader:Reader)= TreeSet(readCSV(reader))
 
     fun readCSV(reader:Reader) =
         CSVFormat.Builder.create(CSVFormat.DEFAULT).apply {

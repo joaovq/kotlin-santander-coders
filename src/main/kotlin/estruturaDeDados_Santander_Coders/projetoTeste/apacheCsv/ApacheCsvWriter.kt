@@ -11,7 +11,7 @@ fun Writer.writeCsv(set:MutableSet<Deal>) {
         set.forEach { (holder, operation, dateTime, amount) ->
             printRecord(holder.agency, holder.account, holder.bank, holder.holder, operation, dateTime, amount)
         }
-        println()
+        println("\n")
         printRecord("AGENCIA", "CONTA", "BANCO", "TITULAR","SALDO TOTAL")
     }
     this.flush()
