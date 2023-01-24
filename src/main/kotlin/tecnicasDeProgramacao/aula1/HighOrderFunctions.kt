@@ -25,8 +25,13 @@ fun calculadora(x: Double, y: Double, operacao: (Double, Double) -> Double): Dou
 // ---
 
 fun main(){
+    /**
+    * High order functions são funções
+     * que recebem uma função ou mais como argumento,
+     * retornando outra função;
+    */
     mostraSoma(::somar)
-    Int::class.java
+    println(Int::and)
     val calc = calculadora(50.0, 10.0, subtrai)
     println(calc)
 }
