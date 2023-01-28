@@ -1,4 +1,4 @@
-package tecnicasDeProgramacao.aula1
+package tecnicasDeProgramacao.aula1.introduction
 
 // CalculaDesconto
 val calculaDesconto: (Double, Double) -> Double = { valor, desconto ->

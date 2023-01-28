@@ -1,6 +1,4 @@
-package tecnicasDeProgramacao.aula1
-
-import kotlin.reflect.KFunction
+package tecnicasDeProgramacao.aula1.introduction
 
 fun somar(a: Int, b: Int): Int {
     val somar = a + b
