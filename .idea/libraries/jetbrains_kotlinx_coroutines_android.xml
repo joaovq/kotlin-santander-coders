@@ -11,6 +11,8 @@
       <root url="jar://$PROJECT_DIR$/lib/kotlin-stdlib-jdk7-1.6.21.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/lib/kotlinx-coroutines-android-1.6.4.jar!/" />
+    </SOURCES>
   </library>
 </component>
