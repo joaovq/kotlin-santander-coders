@@ -1,4 +1,4 @@
-package tecnicasDeProgramacao.aula5.apresentacao
+package tecnicasDeProgramacao.aula6.apresentacao
 
 import java.time.LocalDate
 import java.time.Period
@@ -65,14 +65,14 @@ open class Funcionario(
     val nomeFuncionario : String,
     val salario : Double,
     dataDeContratacao : LocalDate
-):Pessoa(nomeFuncionario)
+): Pessoa(nomeFuncionario)
 
 
 data class Professor(
     val nomeProfessor : String,
     private var salarioProfessor : Double,
     val dataDeContratacao : LocalDate
-):Funcionario(nomeProfessor, salarioProfessor, dataDeContratacao){
+): Funcionario(nomeProfessor, salarioProfessor, dataDeContratacao){
 
     private var anoReajuste : LocalDate = dataDeContratacao
     val salarioAtual : Double
