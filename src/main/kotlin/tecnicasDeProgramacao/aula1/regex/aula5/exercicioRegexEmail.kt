@@ -8,6 +8,7 @@ fun main() {
 }
 
 private fun regex(provider:String): Regex {
-    val regex = Regex("[a-zA-Z0-9^~'`]{3,30}@$provider\\.com|[a-zA-Z0-9^~'`]{3,30}@$provider\\.com\\.br")
+    val regex = Regex("[a-zA-Z\\d^~'`]{3,30}@$provider\\.com" +
+            "|[a-zA-Z\\d^~'`]{3,30}@$provider\\.com\\.br")
     return regex
 }
