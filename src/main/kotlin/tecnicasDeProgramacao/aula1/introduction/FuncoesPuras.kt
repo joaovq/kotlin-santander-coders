@@ -1,4 +1,4 @@
-package tecnicasDeProgramacao.aula1
+package tecnicasDeProgramacao.aula1.introduction
 //(potencia*hora)/1000
 fun main() {
     println(getSpentAtMachine(1000, 2,2))//4.0
