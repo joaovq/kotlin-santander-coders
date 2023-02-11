@@ -1,3 +1,5 @@
+package desafioEAtividadesExtras
+
 fun main(args: Array<String>) {
     MobilePhone(osName = "Android", brand = "Motorola", model = "G7")
     MobilePhone(osName = "Android", brand = "Samsung", model = "S20 Ultra")
