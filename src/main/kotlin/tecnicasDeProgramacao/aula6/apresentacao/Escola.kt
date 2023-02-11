@@ -31,7 +31,7 @@ data class Aluno(
         return notas.media()
     }
 
-    fun addNota(valor: Double) {
+    fun addNota(valor : Double) {
         if (notas.size() < 4)
             notas.addNota(valor)
     }
